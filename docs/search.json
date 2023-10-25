@@ -1,17 +1,31 @@
 [
   {
+    "objectID": "licence.html",
+    "href": "licence.html",
+    "title": "Licence & Acknowledgements",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution Share Alike 4.0 International licence."
+  },
+  {
+    "objectID": "licence.html#acknowledgements",
+    "href": "licence.html#acknowledgements",
+    "title": "Licence & Acknowledgements",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nSome materials are adapted from:\n\nData Science in a Box by Mine Çetinkaya-Rundel (github repo) under a Creative Commons Attribution Share Alike 4.0 International licence\na blogpost by Cédric Scherer under a Creative Commons Attribution 4.0 International licence.\n\nOthers draw on R for Data Science (2nd ed.) by Hadley Wickham, Mine Çetinkaya-Rundel and Garrett Grolemund.\nSee individual files for details."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Introduction to Data Science",
     "section": "",
-    "text": "Welcome to the Introduction to Data Science course at the University of Cologne, WS 2023/2024!\nInstructor: Prof. Ina Bornkessel-Schlesewsky (University of South Australia; Global Faculty member, University of Cologne)"
+    "text": "Instructor: Prof. Ina Bornkessel-Schlesewsky (University of South Australia; Global Faculty member, University of Cologne)"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About the course",
     "section": "",
-    "text": "This course will allow students to develop critical skills in analysing and drawing inferences from data using contemporary open-source computational tools. It will further introduce students to principles of open and reproducible science and thereby the ethical handling of data. These skills are crucial for quantitative research across a wide range of disciplines. They are also highly transferable across different domains and types of data, thus offering students a foundation for lifelong learning and problem solving, as well as potential applications in a range of different professions.\nYou will be introduced to coding in R, an open-source programming language for statistical computing, during this workshop. After introducing basic concepts of data exploration and visualisation within a reproducible workflow, the course will touch on more advanced aspects of data “wrangling” including working with text.\nTextbook: Wickham, Çetinkaya-Rundel, and Grolemund (2023) – freely available online here\nPrerequisites: None. Please bring a laptop.\n\n\n\n\nReferences\n\nWickham, Hadley, Mina Çetinkaya-Rundel, and Garrett Grolemund. 2023. R for Data Science. 2nd ed. O’Reilly Media, Inc. https://www.oreilly.com/library/view/r-for-data/9781492097396/."
+    "text": "You will be introduced to coding in R, an open-source programming language for statistical computing, during this workshop. After introducing basic concepts of data exploration and visualisation within a reproducible workflow, the course will touch on more advanced aspects of data “wrangling” including working with text.\nTextbook: Wickham, Çetinkaya-Rundel, and Grolemund (2023) – freely available online here\nPrerequisites: None. Please bring a laptop.\n\n\n\n\nReferences\n\nWickham, Hadley, Mina Çetinkaya-Rundel, and Garrett Grolemund. 2023. R for Data Science. 2nd ed. O’Reilly Media, Inc. https://www.oreilly.com/library/view/r-for-data/9781492097396/."
   },
   {
     "objectID": "schedule.html",
@@ -19,20 +33,6 @@
     "title": "Schedule & Materials",
     "section": "",
     "text": "Week\nDate\nTopic\nSlides\n\n\n\n\n1\n25/10/2023\nWelcome and introduction\nslides\n\n\nN/A\n01/11/2023\nNo workshop (public holiday)\n\n\n\n2\n08/11/2023\nBasic data exploration and data viz\n\n\n\n3\n15/11/2023\nData exploration part 2\n\n\n\n4\n22/11/2023\nImporting data (+ installing R)\n\n\n\n5\n29/11/2023\nTidying data\n\n\n\n6\n06/12/2023\nWorking with text (“strings”)"
-  },
-  {
-    "objectID": "schedule.html#location",
-    "href": "schedule.html#location",
-    "title": "Schedule & Materials",
-    "section": "Location",
-    "text": "Location\nMAG B2-52"
-  },
-  {
-    "objectID": "schedule.html#dates-times",
-    "href": "schedule.html#dates-times",
-    "title": "Schedule & Materials",
-    "section": "Dates & Times",
-    "text": "Dates & Times\n\nWednesday, Jan 18, 2023\n\n12 – 2 pm\n\nWelcome and introduction (“What is data science?”)\nFirst steps with R\n\nslides\npdf\n\n\n\n\n2:30 – 5 pm\n\nBasic data exploration and visualisation\nA reproducible workflow with Quarto\n\nslides\npdf\n\n\n\n\n\nThursday, Jan 19, 2023\n\n10:00 am – 12:30 pm\n\nMore on R\nData visualisation (ctd.)\n\nslides\npdf\n\n\n\n\n1:30 – 3 pm\n\nPractise your skills!\n\n\n\n3:30 – 5 pm\n\nCustomising Quarto documents (and figures if we have time)\n\nhtml\n\nInstalling R and RStudio on your own computer\n\nslides\npdf\n\n\n\n\n\nFriday, Jan 20, 2023\n\n10:00 am – 12:30 pm\n\nImporting data\n\nslides\npdf\n\nTidying data\n\nslides\npdf\n\nA bit more on customising figures\n\nCreating effective visualisations\n\n\n\n\n1:30 – 3:00 pm\n\nWorking with text (“strings”)\n\n\n\n3:30 – 5:00 pm\n\nVersion control with git and GitHub"
   },
   {
     "objectID": "schedule.html#resources",
