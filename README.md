@@ -5,6 +5,6 @@ This repository contains the website content for the Introduction to Data Scienc
 Some materials are adapted from [Data Science in a Box](https://datasciencebox.org) by Mine Çetinkaya-Rundel ([github repo](https://github.com/rstudio-education/datascience-box)) under a [Creative Commons Attribution Share Alike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licence. Others draw on chapters from [R for Data Science (2nd ed.)](https://r4ds.hadley.nz) by Hadley Wickham and Garrett Grolemund.
 See individual files for details.
 
-Please see the [course website](https://ibsneuro.github.io/2023_datasci_summer/) for further details.
+Please see the [course website](https://ibsneuro.github.io/uoc_datasci/) for further details.
 
 This work is licensed under a [Creative Commons Attribution Share Alike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) licence.
