@@ -1,8 +1,9 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "uoc_datasci"
+  title: "Introduction to Data Science"
   navbar:
     left:
       - href: index.qmd
@@ -11,7 +12,8 @@ website:
 
 format:
   html:
-    theme: cosmo
+    bibliography: references.bib
+    theme: flatly
     css: styles.css
     toc: true
 

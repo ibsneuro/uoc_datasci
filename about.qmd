@@ -1,9 +1,11 @@
 ---
-title: "About"
+title: "About the course"
 ---
 
-About this site
+This course will allow students to develop critical skills in analysing and drawing inferences from data using contemporary open-source computational tools. It will further introduce students to principles of open and reproducible science and thereby the ethical handling of data. These skills are crucial for quantitative research across a wide range of disciplines. They are also highly transferable across different domains and types of data, thus offering students a foundation for lifelong learning and problem solving, as well as potential applications in a range of different professions.
 
-```{r}
-1 + 1
-```
+You will be introduced to coding in R, an open-source programming language for statistical computing, during this workshop. After introducing basic concepts of data exploration and visualisation within a reproducible workflow, the course will touch on more advanced aspects of data "wrangling" including working with text.
+
+Textbook: @wickham2023 – [freely available online here](https://r4ds.hadley.nz)
+
+Prerequisites: None. Please bring a laptop.
