@@ -1,0 +1,191 @@
+---
+title: "Data exploration basics"
+author: "Ina"
+date: "2023-11-08"
+date-format: long
+format: 
+  html:
+    self-contained: TRUE
+execute: 
+  echo: TRUE
+  warning: FALSE
+  message: FALSE
+editor_options: 
+  chunk_output_type: console
+---
+
+## Load packages
+
+We start by loading the packages that we will need using the `library()` command.
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Inspect data
+
+The easiest way to inspect a data set is to simply type its name.
+
+```{r}
+penguins
+
+```
+
+## Basic data exploration
+
+### Filtering observations
+
+Use `filter()` to only keep certain observations according to a criterion that you specify. For example, we might want to focus on Gentoo penguins.
+
+```{r}
+penguins |>
+  filter(species == "Gentoo")
+
+```
+
+```{r}
+penguins |>
+  filter(sex == "female")
+
+```
+
+```{r}
+penguins |> 
+  filter(body_mass_g > 4000)
+
+```
+
+
+
+### Sorting observations
+
+To sort by a particular column (e.g. `body_mass_g`), use `arrange()`. To sort in descending order add a minus sign (N.B. this works for numeric columns only; for other column types, use `desc()`).
+
+```{r}
+penguins |> 
+  arrange(body_mass_g)
+
+penguins |> 
+  arrange(-body_mass_g)
+
+```
+
+### Combining operations
+
+Use the pipe (`|>`) to combine operations, e.g. to filter for female penguins and sort by descending flipper length:
+
+```{r}
+# this is a comment
+penguins |> 
+  filter(sex == "female") |> 
+  arrange(-flipper_length_mm)
+
+```
+
+```{r}
+penguins |> 
+  filter(species == "Chinstrap") |> 
+  arrange(-body_mass_g)
+
+```
+
+
+### Compute summary statistics
+
+Compute summary statistics using `summarise()`. Start by calculating the mean. We need to add `na.rm=TRUE` here to tell R to remove missing values.
+
+This is a good example of how R operates. It won't make assumptions for you about what you want to do, for example how to handle missing values. If you want these excluded from your data when calculating the mean, you will need to specify this.
+
+```{r}
+penguins |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
+
+```
+
+Calculate mean and standard deviation
+
+```{r}
+penguins |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
+            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+
+```
+
+Look at mean and sd for Gentoos only:
+
+```{r}
+penguins |> 
+  filter(species == "Gentoo") |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm = TRUE),
+            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+
+
+```
+
+### Compute summary statistics by group
+
+*Note: this was not covered in the week 2 workshop due to time constraints and will be discussed in week 3.*
+
+Use `group_by()` to create groups which are then applied in the next command, e.g. to compute mean and sd.
+
+```{r}
+
+
+```
+
+## Basic visualisation
+
+Create a scatterplot with flipper length as a predictor of body mass.
+To do so, we pipe the `penguins` data to the `ggplot()` function.
+This function requires us to specify aesthetics (via `aes()`); these make clear how to map parts of the data onto components of the graph. 
+
+In a simple case, e.g. for a basic scatterplot, you will need to specify which variable to map onto the x-axis of the plot and which variable to map onto the y-axis.
+
+You will also need to add one or more "geoms" (i.e. geometric objects). These specify the type of plot; e.g. `geom_point()` creates a scatterplot. 
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+
+```
+
+Create the same type of plot but using bill length:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = bill_length_mm)) +
+  geom_point()
+
+
+```
+
+Create a scatterplot using colour to differentiate between groups (e.g. different species of penguin):
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = bill_length_mm, 
+             colour = species)) +
+  geom_point()
+
+```
+
+*Note: the content below was not covered in the week 2 session due to time constraints and will be discussed in week 3.*
+
+A different way to compare groups is to separate the plot into different facets.
+
+```{r}
+
+
+```
+
+You can also combine the two grouping methods, e.g to look at the role of both species and sex:
+
+```{r}
+
+
+```
+
+
+
