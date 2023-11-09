@@ -5,11 +5,11 @@ date: "2023-11-08"
 date-format: long
 format: 
   html:
-    self-contained: TRUE
+    self-contained: true
 execute: 
-  echo: TRUE
-  warning: FALSE
-  message: FALSE
+  echo: true
+  warning: false
+  message: false
 editor_options: 
   chunk_output_type: console
 ---
