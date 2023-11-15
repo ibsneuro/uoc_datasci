@@ -60,7 +60,7 @@
     "href": "schedule.html",
     "title": "Schedule & Materials",
     "section": "",
-    "text": "Week\nDate\nTopic\nSlides\nOther Materials\n\n\n\n\n1\n25/10/2023\nWelcome and introduction\nslides\n\n\n\nN/A\n01/11/2023\nNo workshop (public holiday)\n\n\n\n\n2\n08/11/2023\nBasic data exploration and data viz\nworkshop slides  installing R\nlive coding output  source\n\n\n3\n15/11/2023\nData exploration part 2\n\n\n\n\n4\n22/11/2023\nImporting data (+ installing R)\n\n\n\n\n5\n29/11/2023\nTidying data\n\n\n\n\n6\n06/12/2023\nWorking with text (“strings”)"
+    "text": "Week\nDate\nTopic\nSlides\nOther Materials\n\n\n\n\n1\n25/10/2023\nWelcome and introduction\nslides\n\n\n\nN/A\n01/11/2023\nNo workshop (public holiday)\n\n\n\n\n2\n08/11/2023\nBasic data exploration and data viz\nworkshop slides  installing R\nlive coding output  source\n\n\n3\n15/11/2023\nData exploration part 2\nslides\nlive coding source\n\n\n4\n22/11/2023\nImporting data (+ installing R)\n\n\n\n\n5\n29/11/2023\nTidying data\n\n\n\n\n6\n06/12/2023\nWorking with text (“strings”)"
   },
   {
     "objectID": "schedule.html#resources",
@@ -68,5 +68,82 @@
     "title": "Schedule & Materials",
     "section": "Resources",
     "text": "Resources\nAny other resources required will be made available here."
+  },
+  {
+    "objectID": "code/session3_live.html",
+    "href": "code/session3_live.html",
+    "title": "Data science session 3",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(palmerpenguins)\nlibrary(gapminder)"
+  },
+  {
+    "objectID": "code/session3_live.html#discussion-of-week-2-exercises",
+    "href": "code/session3_live.html#discussion-of-week-2-exercises",
+    "title": "Data science session 3",
+    "section": "Discussion of week 2 exercises",
+    "text": "Discussion of week 2 exercises"
+  },
+  {
+    "objectID": "code/session3_live.html#r-basics",
+    "href": "code/session3_live.html#r-basics",
+    "title": "Data science session 3",
+    "section": "R Basics",
+    "text": "R Basics\nCreate new objects with the assignment operator &lt;-\nWhat you can do with an object depends on its type, e.g. basic arithmetic with numeric objects only\nTo see the result of a computation that creates a new object, either type the name of the object to inspect it or enclose the operation in parentheses.\nExample of a more complex object name\nExample of a function: seq()\nBe careful with brackets and quotation marks"
+  },
+  {
+    "objectID": "code/session3_live.html#a-little-more-on-data-manipulation",
+    "href": "code/session3_live.html#a-little-more-on-data-manipulation",
+    "title": "Data science session 3",
+    "section": "A little more on data manipulation",
+    "text": "A little more on data manipulation\nCreate new objects from the penguins data\nAdditional ways to summarise\nOther summary functions: median(), min(), max()\nTo look at groups use group_by()\nTo look at the number of observations in a group use count()"
+  },
+  {
+    "objectID": "code/session3_live.html#plotting",
+    "href": "code/session3_live.html#plotting",
+    "title": "Data science session 3",
+    "section": "Plotting",
+    "text": "Plotting\n\nScatterplots for two continuous variables\nScatterplot example:\n\n\nAdd title and axis labels\nAdding a meaningful title and axis labels makes your plot more informative and readable."
+  },
+  {
+    "objectID": "code/session3_live.html#plotting-a-categorical-predictor-of-a-continuous-variable",
+    "href": "code/session3_live.html#plotting-a-categorical-predictor-of-a-continuous-variable",
+    "title": "Data science session 3",
+    "section": "Plotting a categorical predictor of a continuous variable",
+    "text": "Plotting a categorical predictor of a continuous variable\nWhat about species as a predictor of body mass?\ngeom_jitter() produces a better result:"
+  },
+  {
+    "objectID": "code/session3_live.html#bar-column-graphs-to-plot-quantities",
+    "href": "code/session3_live.html#bar-column-graphs-to-plot-quantities",
+    "title": "Data science session 3",
+    "section": "Bar / column graphs to plot quantities",
+    "text": "Bar / column graphs to plot quantities\nAlternative approach: plot mean body mass by species using a bar / column graph with geom_col():\nIt is crucial to summarise first in order to only have one value per species, otherwise the plot won’t show what you think:\nNote that there is also a geom_bar(). Have a look at the documentation: what is the difference between geom_col() and geom_bar()?"
+  },
+  {
+    "objectID": "code/session3_live.html#line-graphs-to-plot-changes-over-time",
+    "href": "code/session3_live.html#line-graphs-to-plot-changes-over-time",
+    "title": "Data science session 3",
+    "section": "Line graphs to plot changes over time",
+    "text": "Line graphs to plot changes over time\nLine graph to plot the number of sightings per year We first need to count the number of sightings\nAdding groups, e.g. to look at the number of sightings per year for each species:"
+  },
+  {
+    "objectID": "code/session3_live.html#histograms-to-examine-distributions",
+    "href": "code/session3_live.html#histograms-to-examine-distributions",
+    "title": "Data science session 3",
+    "section": "Histograms to examine distributions",
+    "text": "Histograms to examine distributions\nUse a histogram to look at a distribution (e.g. of bill depth).\nPair a histogram with facets to look at groups:"
+  },
+  {
+    "objectID": "code/session3_live.html#boxplots-to-examine-distributions",
+    "href": "code/session3_live.html#boxplots-to-examine-distributions",
+    "title": "Data science session 3",
+    "section": "Boxplots to examine distributions",
+    "text": "Boxplots to examine distributions\n\nLine = median\nLower edge of box = 1st quartile\nUpper edge of box = 3rd quartile\nWhiskers extend to largest / smallest value, maximally 1.5 interquartile ranges from edge of box\nData points beyond the whiskers are deemed outliers and plotted individually\n\nAdd colour fill:"
+  },
+  {
+    "objectID": "code/session3_live.html#gapminder-data",
+    "href": "code/session3_live.html#gapminder-data",
+    "title": "Data science session 3",
+    "section": "Gapminder data",
+    "text": "Gapminder data\n\nHow has life expectancy in Australia changed over time?\nWhat was the relationship between life expectancy and how wealthy a country is (gdpPercap) in 1952? In 2007?\nHow did the mean life expectancy per continent change over time?\nWhich continent had the highest variability in population across countries? Pick two years of your choice to examine."
   }
 ]

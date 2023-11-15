@@ -8,7 +8,7 @@ title: "Schedule & Materials"
 | 1 | 25/10/2023 | Welcome and introduction |[slides](slides/d01_01_welcome.html){target="_blank"} |      |
 | N/A | 01/11/2023 | No workshop (public holiday) |      |      |
 | 2 | 08/11/2023 | Basic data exploration and data viz|[workshop slides](slides/d01_02_data_exploration_basics.html){target="_blank"} \ [installing R](slides/d01_03_installing_R.html){target="_blank"}|[live coding output](code/week2_basic_data_exploration_live_coding.html) \ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/week2_basic_data_exploration_live_coding.qmd) |
-| 3 | 15/11/2023 | Data exploration part 2 |      |      |
+| 3 | 15/11/2023 | Data exploration part 2 | [slides](slides/d01_04_data_exploration2.html){target="_blank"}| [live coding source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/session3_live.qmd)     |
 | 4 | 22/11/2023 | Importing data (+ installing R) |      |      |
 | 5 | 29/11/2023 | Tidying data |      |      |
 | 6 | 06/12/2023 | Working with text ("strings") |      |      |
