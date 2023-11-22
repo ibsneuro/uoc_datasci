@@ -1,0 +1,80 @@
+---
+title: "Week 4 exercises: Himalayan expeditions"
+author: "insert your name here"
+format: 
+  html:
+    self-contained: true
+    toc: true
+---
+
+## Background
+
+For our week 4 workshop, we will draw on a new data set, thus giving you the opportunity to practise and consolidate what we have covered over the past few weeks.
+The data set is on Himalayan climbing expeditions and it is drawn from a ["Tidy Tuesday" challenge from 2020](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-22/readme.md). #TidyTuesday is a "weekly social data project", as a part of which participants around the world practice their data science skills in R by applying them to a new data set each week. See the [Tidy Tuesday website and repository](https://github.com/rfordatascience/tidytuesday) for further details.
+
+In the week 4 workshop, we will first go through how to load the data set.
+You will then have time to explore the questions below.
+For each question, please provide a brief answer as well as the code that you used to get to your answer.
+When creating plots, add appropriate titles and axis labels.
+
+Please upload the completed (and rendered) document in fulfilment of your week 4 exercises.
+
+## Load packages
+
+```{r}
+library(tidyverse)
+```
+
+
+## Load data on Himalayan climbing expeditions
+
+Don't worry about the details of the below code for now. In brief, it uses the function `read_csv()` to read in some data from files that have been made available on the Tidytuesday website. We will see how to read in our own data in week 5.
+
+```{r}
+members <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/members.csv')
+expeditions <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/expeditions.csv')
+peaks <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/peaks.csv')
+```
+
+
+## Basic exploration of peaks and their climbing status
+
+We start by using the `peaks` data. 
+
+1. Plot a histogram of the height of the Himalayan peaks in the data set. Remember to adjust the binwidth parameter. Which value did you choose and why? Within which range of heights (roughly) do we find the most peaks?
+
+2. How many peaks in the data set have been climbed and how many haven't?
+
+3. Does the distribution of heights differ between the peaks that have been climbed and those that haven't? Use an appropriate visualisation to address this question.
+
+4. How did the number of first ascents change over time? Use a line graph to chart the number of first ascents from year to year. (Hint: the first time you do this, you will likely see a very strange-looking graph. Use the `summary()` function to have a look at the values of `first_ascent_year` and have a think about how you could fix the problem that you encounter before replotting.)
+
+5. a. Which country (or countries) has/have recorded the highest number of first ascents?
+
+b. To get rid of the missing values in the data frame that your response to a. likely produced, use `filter(!is.na(first_ascent_country))` in addition to the other computations that you undertook. Save the resulting data frame as a new object.
+
+c. Use your newly created data frame from b to visualise the number of first ascents per country for all countries with at least 10 first ascents. Do this using a column graph.
+
+d. Try flipping your column graph from c to a horizontal layout by switching what you put on the x and y axes.
+
+e. One final modification: you can sort the columns to be ordered from high to low (for horizontal bars) by using `reorder(first_ascent_country,n)`. Try plugging this into your y-axis aesthetic! If you want the reverse order, use `-n` instead.
+
+## Expeditions
+
+Let's now look more closely at expeditions by using the `expeditions` data.
+
+### How deadly are individual peaks?
+
+The columns `member_deaths` and `hired_staff_deaths` encode the number of deaths (if any) per expedition.
+
+6. a. To look at how deadly individual peaks are, first create a new column which encodes the total number of deaths per expedition, then compute a summary statistic for the overall number of deaths per mountain. (Hint: there is a function called `sum()` that you can apply in the same way as `mean()`, `sd()` etc.). Sort in descending order of deaths and save as a new object. Which mountain is the deadliest according to your calculations?
+
+b. Use the new data frame created in a. to plot a horizontal column graph of the top 10 deadly mountains. As for question 5, sort the columns so that the deadliest mountain is at the top.
+
+### Which season has the highest likelihood of success? (optional)
+
+7. Use a boxplot to compare the highpoint reached by expeditions per season. Filter out the "unhelpful" values (you will know which ones I mean when you create the basic plot). Note that you can use `filter()` to only keep rows that are not equal to a particular value by using != rather than ==, so to eliminate the value "red" from a column called "colour", for example, you could use `filter(colour != "red")`. Based on this graph, which season would you choose if you were opting for a Himalayan climbing expedition?
+
+8. a. Examine the top reasons for expedition termination by looking at the `termination_reason` column. (Hint: `count` will be very useful here ...) 
+
+b. Drawing on your answer to a, isolate the number of expeditions that were terminated because they succeeded in climbing the main peak and count how many of these there were per season and year. (Consider restricting the range of years that you look at to make the graph a bit clearer.) What patterns can you see?

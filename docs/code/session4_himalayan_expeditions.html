@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ina">
-<meta name="dcterms.date" content="2023-11-22">
+<meta name="author" content="insert your name here">
 
-<title>Introduction to Data Science - Data science session 3</title>
+<title>Introduction to Data Science - Week 4 exercises: Himalayan expeditions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4529,20 +4528,15 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#discussion-of-week-2-exercises" id="toc-discussion-of-week-2-exercises" class="nav-link active" data-scroll-target="#discussion-of-week-2-exercises">Discussion of week 2 exercises</a></li>
-  <li><a href="#r-basics" id="toc-r-basics" class="nav-link" data-scroll-target="#r-basics">R Basics</a></li>
-  <li><a href="#a-little-more-on-data-manipulation" id="toc-a-little-more-on-data-manipulation" class="nav-link" data-scroll-target="#a-little-more-on-data-manipulation">A little more on data manipulation</a></li>
-  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load packages</a></li>
+  <li><a href="#load-data-on-himalayan-climbing-expeditions" id="toc-load-data-on-himalayan-climbing-expeditions" class="nav-link" data-scroll-target="#load-data-on-himalayan-climbing-expeditions">Load data on Himalayan climbing expeditions</a></li>
+  <li><a href="#basic-exploration-of-peaks-and-their-climbing-status" id="toc-basic-exploration-of-peaks-and-their-climbing-status" class="nav-link" data-scroll-target="#basic-exploration-of-peaks-and-their-climbing-status">Basic exploration of peaks and their climbing status</a></li>
+  <li><a href="#expeditions" id="toc-expeditions" class="nav-link" data-scroll-target="#expeditions">Expeditions</a>
   <ul class="collapse">
-  <li><a href="#scatterplots-for-two-continuous-variables" id="toc-scatterplots-for-two-continuous-variables" class="nav-link" data-scroll-target="#scatterplots-for-two-continuous-variables">Scatterplots for two continuous variables</a></li>
-  <li><a href="#add-title-and-axis-labels" id="toc-add-title-and-axis-labels" class="nav-link" data-scroll-target="#add-title-and-axis-labels">Add title and axis labels</a></li>
+  <li><a href="#how-deadly-are-individual-peaks" id="toc-how-deadly-are-individual-peaks" class="nav-link" data-scroll-target="#how-deadly-are-individual-peaks">How deadly are individual peaks?</a></li>
+  <li><a href="#which-season-has-the-highest-likelihood-of-success-optional" id="toc-which-season-has-the-highest-likelihood-of-success-optional" class="nav-link" data-scroll-target="#which-season-has-the-highest-likelihood-of-success-optional">Which season has the highest likelihood of success? (optional)</a></li>
   </ul></li>
-  <li><a href="#plotting-a-categorical-predictor-of-a-continuous-variable" id="toc-plotting-a-categorical-predictor-of-a-continuous-variable" class="nav-link" data-scroll-target="#plotting-a-categorical-predictor-of-a-continuous-variable">Plotting a categorical predictor of a continuous variable</a></li>
-  <li><a href="#bar-column-graphs-to-plot-quantities" id="toc-bar-column-graphs-to-plot-quantities" class="nav-link" data-scroll-target="#bar-column-graphs-to-plot-quantities">Bar / column graphs to plot quantities</a></li>
-  <li><a href="#line-graphs-to-plot-changes-over-time" id="toc-line-graphs-to-plot-changes-over-time" class="nav-link" data-scroll-target="#line-graphs-to-plot-changes-over-time">Line graphs to plot changes over time</a></li>
-  <li><a href="#histograms-to-examine-distributions" id="toc-histograms-to-examine-distributions" class="nav-link" data-scroll-target="#histograms-to-examine-distributions">Histograms to examine distributions</a></li>
-  <li><a href="#boxplots-to-examine-distributions" id="toc-boxplots-to-examine-distributions" class="nav-link" data-scroll-target="#boxplots-to-examine-distributions">Boxplots to examine distributions</a></li>
-  <li><a href="#gapminder-data" id="toc-gapminder-data" class="nav-link" data-scroll-target="#gapminder-data">Gapminder data</a></li>
   </ul>
 </nav>
     </div>
@@ -4551,7 +4545,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data science session 3</h1>
+<h1 class="title">Week 4 exercises: Himalayan expeditions</h1>
 </div>
 
 
@@ -4561,16 +4555,10 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Ina </p>
+             <p>insert your name here </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -4578,6 +4566,14 @@ vertical-align: -.125em;
 
 </header>
 
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>For our week 4 workshop, we will draw on a new data set, thus giving you the opportunity to practise and consolidate what we have covered over the past few weeks. The data set is on Himalayan climbing expeditions and it is drawn from a <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-22/readme.md">“Tidy Tuesday” challenge from 2020</a>. #TidyTuesday is a “weekly social data project”, as a part of which participants around the world practice their data science skills in R by applying them to a new data set each week. See the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday website and repository</a> for further details.</p>
+<p>In the week 4 workshop, we will first go through how to load the data set. You will then have time to explore the questions below. For each question, please provide a brief answer as well as the code that you used to get to your answer. When creating plots, add appropriate titles and axis labels.</p>
+<p>Please upload the completed (and rendered) document in fulfilment of your week 4 exercises.</p>
+</section>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -4592,82 +4588,98 @@ vertical-align: -.125em;
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="discussion-of-week-2-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="discussion-of-week-2-exercises">Discussion of week 2 exercises</h2>
 </section>
-<section id="r-basics" class="level2">
-<h2 class="anchored" data-anchor-id="r-basics">R Basics</h2>
-<p>Create new objects with the assignment operator <code>&lt;-</code></p>
-<p>What you can do with an object depends on its type, e.g. basic arithmetic with numeric objects only</p>
-<p>To see the result of a computation that creates a new object, either type the name of the object to inspect it or enclose the operation in parentheses.</p>
-<p>Example of a more complex object name</p>
-<p>Example of a function: <code>seq()</code></p>
-<p>Be careful with brackets and quotation marks</p>
+<section id="load-data-on-himalayan-climbing-expeditions" class="level2">
+<h2 class="anchored" data-anchor-id="load-data-on-himalayan-climbing-expeditions">Load data on Himalayan climbing expeditions</h2>
+<p>Don’t worry about the details of the below code for now. In brief, it uses the function <code>read_csv()</code> to read in some data from files that have been made available on the Tidytuesday website. We will see how to read in our own data in week 5.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>members <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/members.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 76519 Columns: 21
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (10): expedition_id, member_id, peak_id, peak_name, season, sex, citizen...
+dbl  (5): year, age, highpoint_metres, death_height_metres, injury_height_me...
+lgl  (6): hired, success, solo, oxygen_used, died, injured
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>expeditions <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/expeditions.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 10364 Columns: 16
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr  (6): expedition_id, peak_id, peak_name, season, termination_reason, tre...
+dbl  (6): year, highpoint_metres, members, member_deaths, hired_staff, hired...
+lgl  (1): oxygen_used
+date (3): basecamp_date, highpoint_date, termination_date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>peaks <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/peaks.csv&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 468 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (6): peak_id, peak_name, peak_alternative_name, climbing_status, first_a...
+dbl (2): height_metres, first_ascent_year
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
 </section>
-<section id="a-little-more-on-data-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="a-little-more-on-data-manipulation">A little more on data manipulation</h2>
-<p>Create new objects from the penguins data</p>
-<p>Additional ways to summarise</p>
-<p>Other summary functions: <code>median()</code>, <code>min()</code>, <code>max()</code></p>
-<p>To look at groups use <code>group_by()</code></p>
-<p>To look at the number of observations in a group use <code>count()</code></p>
+<section id="basic-exploration-of-peaks-and-their-climbing-status" class="level2">
+<h2 class="anchored" data-anchor-id="basic-exploration-of-peaks-and-their-climbing-status">Basic exploration of peaks and their climbing status</h2>
+<p>We start by using the <code>peaks</code> data.</p>
+<ol type="1">
+<li><p>Plot a histogram of the height of the Himalayan peaks in the data set. Remember to adjust the binwidth parameter. Which value did you choose and why? Within which range of heights (roughly) do we find the most peaks?</p></li>
+<li><p>How many peaks in the data set have been climbed and how many haven’t?</p></li>
+<li><p>Does the distribution of heights differ between the peaks that have been climbed and those that haven’t? Use an appropriate visualisation to address this question.</p></li>
+<li><p>How did the number of first ascents change over time? Use a line graph to chart the number of first ascents from year to year. (Hint: the first time you do this, you will likely see a very strange-looking graph. Use the <code>summary()</code> function to have a look at the values of <code>first_ascent_year</code> and have a think about how you could fix the problem that you encounter before replotting.)</p></li>
+<li><ol type="a">
+<li>Which country (or countries) has/have recorded the highest number of first ascents?</li>
+</ol></li>
+</ol>
+<ol start="2" type="a">
+<li><p>To get rid of the missing values in the data frame that your response to a. likely produced, use <code>filter(!is.na(first_ascent_country))</code> in addition to the other computations that you undertook. Save the resulting data frame as a new object.</p></li>
+<li><p>Use your newly created data frame from b to visualise the number of first ascents per country for all countries with at least 10 first ascents. Do this using a column graph.</p></li>
+<li><p>Try flipping your column graph from c to a horizontal layout by switching what you put on the x and y axes.</p></li>
+<li><p>One final modification: you can sort the columns to be ordered from high to low (for horizontal bars) by using <code>reorder(first_ascent_country,n)</code>. Try plugging this into your y-axis aesthetic! If you want the reverse order, use <code>-n</code> instead.</p></li>
+</ol>
 </section>
-<section id="plotting" class="level2">
-<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
-<section id="scatterplots-for-two-continuous-variables" class="level3">
-<h3 class="anchored" data-anchor-id="scatterplots-for-two-continuous-variables">Scatterplots for two continuous variables</h3>
-<p>Scatterplot example:</p>
+<section id="expeditions" class="level2">
+<h2 class="anchored" data-anchor-id="expeditions">Expeditions</h2>
+<p>Let’s now look more closely at expeditions by using the <code>expeditions</code> data.</p>
+<section id="how-deadly-are-individual-peaks" class="level3">
+<h3 class="anchored" data-anchor-id="how-deadly-are-individual-peaks">How deadly are individual peaks?</h3>
+<p>The columns <code>member_deaths</code> and <code>hired_staff_deaths</code> encode the number of deaths (if any) per expedition.</p>
+<ol start="6" type="1">
+<li><ol type="a">
+<li>To look at how deadly individual peaks are, first create a new column which encodes the total number of deaths per expedition, then compute a summary statistic for the overall number of deaths per mountain. (Hint: there is a function called <code>sum()</code> that you can apply in the same way as <code>mean()</code>, <code>sd()</code> etc.). Sort in descending order of deaths and save as a new object. Which mountain is the deadliest according to your calculations?</li>
+</ol></li>
+</ol>
+<ol start="2" type="a">
+<li>Use the new data frame created in a. to plot a horizontal column graph of the top 10 deadly mountains. As for question 5, sort the columns so that the deadliest mountain is at the top.</li>
+</ol>
 </section>
-<section id="add-title-and-axis-labels" class="level3">
-<h3 class="anchored" data-anchor-id="add-title-and-axis-labels">Add title and axis labels</h3>
-<p>Adding a meaningful title and axis labels makes your plot more informative and readable.</p>
-</section>
-</section>
-<section id="plotting-a-categorical-predictor-of-a-continuous-variable" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-a-categorical-predictor-of-a-continuous-variable">Plotting a categorical predictor of a continuous variable</h2>
-<p>What about species as a predictor of body mass?</p>
-<p><code>geom_jitter()</code> produces a better result:</p>
-</section>
-<section id="bar-column-graphs-to-plot-quantities" class="level2">
-<h2 class="anchored" data-anchor-id="bar-column-graphs-to-plot-quantities">Bar / column graphs to plot quantities</h2>
-<p>Alternative approach: plot mean body mass by species using a bar / column graph with <code>geom_col()</code>:</p>
-<p>It is crucial to summarise first in order to only have one value per species, otherwise the plot won’t show what you think:</p>
-<p>Note that there is also a <code>geom_bar()</code>. Have a look at the documentation: what is the difference between <code>geom_col()</code> and <code>geom_bar()</code>?</p>
-</section>
-<section id="line-graphs-to-plot-changes-over-time" class="level2">
-<h2 class="anchored" data-anchor-id="line-graphs-to-plot-changes-over-time">Line graphs to plot changes over time</h2>
-<p>Line graph to plot the number of sightings per year We first need to count the number of sightings</p>
-<p>Adding groups, e.g. to look at the number of sightings per year for each species:</p>
-</section>
-<section id="histograms-to-examine-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="histograms-to-examine-distributions">Histograms to examine distributions</h2>
-<p>Use a histogram to look at a distribution (e.g. of bill depth).</p>
-<p>Pair a histogram with facets to look at groups:</p>
-</section>
-<section id="boxplots-to-examine-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="boxplots-to-examine-distributions">Boxplots to examine distributions</h2>
-<ul>
-<li>Line = median</li>
-<li>Lower edge of box = 1st quartile</li>
-<li>Upper edge of box = 3rd quartile</li>
-<li>Whiskers extend to largest / smallest value, maximally 1.5 interquartile ranges from edge of box</li>
-<li>Data points beyond the whiskers are deemed outliers and plotted individually</li>
-</ul>
-<p>Add colour fill:</p>
-</section>
-<section id="gapminder-data" class="level2">
-<h2 class="anchored" data-anchor-id="gapminder-data">Gapminder data</h2>
-<ul>
-<li>How has life expectancy in Australia changed over time?</li>
-<li>What was the relationship between life expectancy and how wealthy a country is (gdpPercap) in 1952? In 2007?</li>
-<li>How did the mean life expectancy per continent change over time?</li>
-<li>Which continent had the highest variability in population across countries? Pick two years of your choice to examine.</li>
-</ul>
+<section id="which-season-has-the-highest-likelihood-of-success-optional" class="level3">
+<h3 class="anchored" data-anchor-id="which-season-has-the-highest-likelihood-of-success-optional">Which season has the highest likelihood of success? (optional)</h3>
+<ol start="7" type="1">
+<li><p>Use a boxplot to compare the highpoint reached by expeditions per season. Filter out the “unhelpful” values (you will know which ones I mean when you create the basic plot). Note that you can use <code>filter()</code> to only keep rows that are not equal to a particular value by using != rather than ==, so to eliminate the value “red” from a column called “colour”, for example, you could use <code>filter(colour != &quot;red&quot;)</code>. Based on this graph, which season would you choose if you were opting for a Himalayan climbing expedition?</p></li>
+<li><ol type="a">
+<li>Examine the top reasons for expedition termination by looking at the <code>termination_reason</code> column. (Hint: <code>count</code> will be very useful here …)</li>
+</ol></li>
+</ol>
+<ol start="2" type="a">
+<li>Drawing on your answer to a, isolate the number of expeditions that were terminated because they succeeded in climbing the main peak and count how many of these there were per season and year. (Consider restricting the range of years that you look at to make the graph a bit clearer.) What patterns can you see?</li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
