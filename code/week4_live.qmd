@@ -1,0 +1,425 @@
+---
+title: "Data science session 3"
+author: "Ina"
+date: today
+date-format: long
+format: 
+  html:
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+library(gapminder)
+```
+
+::: {.callout-important}
+## Note
+
+This document includes both the week 3 live coding (as already uploaded in week 3) and the week 4 live coding additions, as a catch up for the topics that we didn't manage to cover in week 3.
+:::
+
+## Discussion of week 2 exercises
+
+### Select
+
+Select allows us to select particular columns. Use a minus sign to deselect columns.
+
+```{r}
+penguins |> 
+  select(species,sex,island)
+
+penguins |> 
+  select(-year)
+
+```
+
+### Mutate
+
+Mutate creates new columns, most typically based on existing ones.
+
+```{r}
+penguins |> 
+  mutate(body_mass_kg = body_mass_g/1000)
+```
+
+### Size aesthetic
+
+The size aesthetic maps a variable onto different sizes.
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g, 
+             size = bill_length_mm)) +
+  geom_point()
+
+```
+
+Use of size not as an aesthetic but to change the size of all points.
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(size = 5)
+
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(size = 2)
+```
+
+Similar use of colour not as an aesthetic but to set a uniform colour:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(colour = "steelblue")
+
+```
+
+Aesthetics can also be set just for individual geoms, as below. In this case, they will apply only to the geom in question, not to the entire plot (as when they are specified directly as an argument of `ggplot()`). We will return to this when we look at combining different geoms later in the course.
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(colour = species))
+
+```
+
+## R Basics
+
+Create new objects with the assignment operator `<-` 
+```{r}
+
+a <-  1 + 2
+b <-  3 + 4
+c <- "a text object"
+```
+
+What you can do with an object depends on its type, e.g. basic arithmetic with numeric objects only
+
+```{r}
+a + b
+
+# can't add b and c because c is a string
+# b + c
+
+```
+
+To see the result of a computation that creates a new object, either type the name of the object to inspect it or enclose the operation in parentheses.
+
+```{r}
+(d <- a - b)
+```
+
+Example of a more complex object name
+
+```{r}
+
+this_is_a_really_long_name <- 2.5
+
+this_is_too <-  3.5
+
+```
+
+Example of a function: `seq()`
+
+```{r}
+
+seq(1,10)
+
+seq(1,100, by = 10)
+
+```
+
+Be careful with brackets and quotation marks
+
+```{r}
+# x <- "hello world
+
+# seq(1,10
+
+```
+
+## A little more on data manipulation
+
+Create new objects from the penguins data
+
+```{r}
+adelies <- penguins |> 
+  filter(species == "Adelie")
+
+adelies
+```
+
+### Additional ways to summarise
+
+```{r}
+penguins |> 
+  summarise(median_body_mass = median(body_mass_g, na.rm=TRUE))
+
+```
+
+Other summary functions: `median()`, `min()`, `max()`
+
+To look at groups use `group_by()`
+
+```{r}
+penguins |> 
+  group_by(species) |> 
+  summarise(median_body_mass = median(body_mass_g, na.rm = TRUE))
+
+```
+
+To look at the number of observations in a group use `count()`
+
+```{r}
+penguins |> 
+  count(species)
+
+penguins |> 
+  count(species,island)
+```
+
+### Additional ways to inspect data
+
+The easiest way to inspect a data set is to type its name
+
+```{r}
+penguins
+
+```
+
+The functions `head()` and `tail()` display the first few and last few rows, respectively.
+
+```{r}
+head(penguins)
+
+head(penguins, n=15)
+
+tail(penguins)
+```
+
+`glimpse()` shows the columns in a horizontal layout
+
+```{r}
+glimpse(penguins)
+
+```
+
+
+## Plotting 
+
+### Scatterplots for two continuous variables
+
+Scatterplot example, which also shows how to add title and axis labels. Adding a meaningful title and axis labels makes your plot more informative and readable.
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point() +
+  labs(
+    title = "Body mass as a function of flipper length",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)"
+  )
+
+```
+
+### Plotting a categorical predictor of a continuous variable
+
+What about species as a predictor of body mass?
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = body_mass_g)) +
+  geom_point()
+
+```
+
+`geom_jitter()` produces a better result:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = body_mass_g)) +
+  geom_jitter()
+
+```
+
+### Bar / column graphs to plot quantities
+
+Alternative approach: plot mean body mass by species using a bar / column graph with `geom_col()`:
+
+```{r}
+penguins |> 
+  group_by(species) |> 
+  summarise(mean_body_mass = mean(body_mass_g, na.rm=TRUE)) |> 
+  ggplot(aes(x = species, y = mean_body_mass)) +
+  geom_col()
+
+```
+
+It is crucial to summarise first in order to only have one value per species, otherwise the plot won't show what you think:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = body_mass_g)) +
+  geom_col()
+
+```
+
+
+Note that there is also a `geom_bar()`. Have a look at the documentation: what is the difference between `geom_col()` and `geom_bar()`?
+
+### Line graphs to plot changes over time
+
+Line graph to plot the number of sightings per year
+We first need to count the number of sightings
+
+```{r}
+penguins |> 
+  count(year) |> 
+  ggplot(aes(x = year, y = n)) +
+  geom_line() +
+  geom_point() 
+
+```
+
+Adding groups, e.g. to look at the number of sightings per year for each species:
+
+```{r}
+penguins |> 
+  count(year, species) |> 
+  ggplot(aes(x = year, y = n, colour = species)) +
+  geom_line() +
+  geom_point()
+
+```
+
+Selecting aesthetics for one geom only:
+
+```{r}
+penguins |> 
+  count(year, species) |> 
+  ggplot(aes(x = year, y = n)) +
+    geom_point() +
+    geom_line(aes(colour = species))
+
+```
+
+
+### Histograms to examine distributions
+
+Use a histogram to look at a distribution (e.g. of bill depth).
+
+```{r}
+penguins |> 
+  ggplot(aes(x = bill_depth_mm)) +
+  geom_histogram(binwidth = 0.5)
+
+```
+
+Pair a histogram with facets to look at groups:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = bill_depth_mm)) +
+  geom_histogram(bindwidth = 0.5) +
+  facet_wrap(~species)
+
+```
+
+### Boxplots to examine distributions
+
+- Line = median
+- Lower edge of box = 1st quartile
+- Upper edge of box = 3rd quartile
+- Whiskers extend to largest / smallest value, maximally 1.5 interquartile ranges from edge of box
+- Data points beyond the whiskers are deemed outliers and plotted individually
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = bill_depth_mm)) +
+  geom_boxplot()
+
+```
+
+Add colour fill:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = species, y = bill_depth_mm, fill = sex)) +
+  geom_boxplot(outlier.shape = 3, alpha = 0.5)
+
+```
+
+## Gapminder data
+
+```{r}
+summary(gapminder)
+```
+
+- How has life expectancy in Germany changed over time?
+
+```{r}
+gapminder |> 
+  filter(country == "Germany") |> 
+  ggplot(aes(x = year, y = lifeExp)) +
+  geom_line() +
+  geom_point()
+
+```
+
+- What was the relationship between life expectancy and how wealthy a country is (gdpPercap) in 1952? In 2007?
+
+Start by looking at 1952:
+
+```{r}
+gapminder |> 
+  filter(year == 1952) |> 
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+
+```
+
+Identify the outlier:
+
+```{r}
+gapminder |> 
+  filter(year == 1952, gdpPercap > 90000)
+
+```
+
+Remove the outlier:
+
+```{r}
+gapminder |> 
+  filter(year == 1952, gdpPercap < 90000) |> 
+  ggplot(aes(x = gdpPercap, y = lifeExp)) +
+  geom_point() +
+  scale_x_log10()
+
+```
+
+Note that even after removing the outlier, there were still many datapoints "squashed together" close to 0, suggesting that there is a disparity of scale in regard to `gdpPercap` (i.e. the values of this variable for different countries are on different orders of magnitude). We have addressed this using a log scale (via the addition of `scale_x_log10()`).
+
+**We did not look at 2007 in the workshop on account of time constraints. However, the approach to do this would be parallel to the above.**
+
+- How did the mean life expectancy per continent change over time?
+
+```{r}
+gapminder |> 
+  group_by(continent, year) |> 
+  summarise(mean_lifeExp = mean(lifeExp, na.rm = TRUE)) |> 
+  ggplot(aes(x = year, y = mean_lifeExp, colour = continent)) +
+  geom_line()
+
+```
+
+
+**The below question was not examined in the workshop due to time constraints.**
+
+- Which continent had the highest variability in population across countries? Pick two years of your choice to examine.
