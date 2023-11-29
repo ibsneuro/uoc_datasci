@@ -1,0 +1,178 @@
+---
+title: "Week 5"
+author: "Ina"
+format: 
+  html:
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+```
+
+::: {.callout-note}
+The format of the header in this .qmd doc shows you how to create a self-contained document, with all styles, images etc. embedded. The indents are important so ensure that you replicate this structure exactly as given:
+
+![](images/self_contained.png)
+
+:::
+
+## Importing files
+
+Use `read_csv()` to read a csv file. Using the project-based approach as discussed in the workshop and assuming that your .qmd file and the .csv file are both in the project directory, you only need to specify the file name.
+
+```{r}
+st_ratios <- read_csv("student_teacher_ratios.csv")
+
+```
+
+Inspect the data
+
+```{r}
+
+st_ratios
+
+glimpse(st_ratios)
+```
+
+Select the columns of interest
+
+```{r}
+st_ratios_sel <- st_ratios |> 
+  select(country, region, student_ratio)
+
+st_ratios_sel
+```
+
+### Brief exploration of the student-teacher data
+
+#### 1. Which region has the highest variability?
+
+Note the use of a custom colour palette for the fill aesthetic and the use of a custom theme.
+
+```{r}
+st_ratios_sel |> 
+  ggplot(aes(x = region, y = student_ratio, fill = region)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_bw() +
+  labs(
+    title = "Student-teacher ratios",
+    subtitle = "by region",
+    y = "Student-to-teacher ratio",
+    x = "",
+    fill = "Continent"
+  )
+  
+
+```
+
+Display the same information using a violin plot:
+
+```{r}
+st_ratios_sel |> 
+  ggplot(aes(x = region, y = student_ratio, colour = region)) +
+  geom_jitter(alpha = 0.5) +
+  geom_violin(alpha = 0.6) +
+  coord_flip() +
+  scale_colour_brewer(palette = "Dark2") +
+  theme_bw() +
+  guides(colour = "none") +
+  labs(
+    title = "Student-teacher ratio",
+    subtitle = "by region",
+    x = "",
+    y = "Student-to-teacher ratio"
+  )
+
+```
+
+#### 2. Focus on the region that you identified in 1.
+
+##### Create a new dataframe just for this region. 
+
+```{r}
+st_ratios_africa <- st_ratios_sel |> 
+  filter(region == "Africa")
+
+st_ratios_africa
+
+```
+
+##### Which country has the lowest ST-ratio in this region and which has the highest? What are these?
+
+Perhaps the simplest way to approach this is to use `arrange()` to sort the data in ascending and descending order.
+
+```{r}
+st_ratios_africa |> 
+  arrange(student_ratio)
+
+st_ratios_africa |> 
+  arrange(-student_ratio)
+```
+
+A more principled way to extract the row with the highest or lowest value is to use `slice_min()` and `slice_max()`.
+Adding `pull(variable_name)` further allows you to extract the value in that cell for further use.
+
+```{r}
+st_ratios_africa |> 
+  slice_min(order_by = student_ratio, n = 1)
+
+st_ratios_africa |> 
+  slice_max(order_by = student_ratio, n = 1) |> 
+  pull(country)
+
+```
+
+
+##### Isolate the countries with a ST-ratio higher than the median and plot the ST-ratios for these using an ordered horizontal column graph (recall from the week 4 exercises how to change the order). Use an appealing colour for the columns and pick a theme for the plot that you like.
+
+Here, you might first compute the mean using summarise and then use the resulting value to filter the data frame.
+
+```{r}
+st_ratios_africa |> 
+  summarise(median_ratio = median(student_ratio, na.rm = TRUE))
+
+st_ratios_africa |> 
+  filter(student_ratio > 36.4)
+
+```
+
+Alternatively, you could again use `pull()` to extract the value from the data frame and save as a new object, which is then used to provide the value for the filter operation.
+This has the advantage of making the code more robust to changes, if there is an update to the underlying dataset (e.g. ten countries are added, thus changing the median value), the code will still yield accurate results.
+
+```{r}
+median_st_africa <- st_ratios_africa |> 
+  summarise(median_ratio = median(student_ratio, na.rm = TRUE)) |> 
+  pull(median_ratio)
+
+st_ratios_africa |> 
+  filter(student_ratio > median_st_africa)
+
+```
+
+Finally, you can compute the median within `filter()` itself and then plot:
+
+```{r}
+st_ratios_africa |> 
+  filter(student_ratio > median(student_ratio, na.rm=TRUE)) |> 
+  ggplot(aes(x = reorder(country,student_ratio), y = student_ratio)) +
+  geom_col(fill = "palevioletred3") +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = " Student-teacher ratios in African countries",
+    subtitle = "for countries with higher-than-median ST-ratios",
+    x = "",
+    y = "Student-to-teacher ratio"
+  )
+
+```
+
+
+
+
+
