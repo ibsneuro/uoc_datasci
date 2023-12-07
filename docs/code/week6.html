@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ina">
-<meta name="dcterms.date" content="2023-12-07">
 
-<title>Introduction to Data Science - Data science session 3</title>
+<title>Introduction to Data Science - Week 6 live coding</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4529,20 +4527,10 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#discussion-of-week-2-exercises" id="toc-discussion-of-week-2-exercises" class="nav-link active" data-scroll-target="#discussion-of-week-2-exercises">Discussion of week 2 exercises</a></li>
-  <li><a href="#r-basics" id="toc-r-basics" class="nav-link" data-scroll-target="#r-basics">R Basics</a></li>
-  <li><a href="#a-little-more-on-data-manipulation" id="toc-a-little-more-on-data-manipulation" class="nav-link" data-scroll-target="#a-little-more-on-data-manipulation">A little more on data manipulation</a></li>
-  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a>
-  <ul class="collapse">
-  <li><a href="#scatterplots-for-two-continuous-variables" id="toc-scatterplots-for-two-continuous-variables" class="nav-link" data-scroll-target="#scatterplots-for-two-continuous-variables">Scatterplots for two continuous variables</a></li>
-  <li><a href="#add-title-and-axis-labels" id="toc-add-title-and-axis-labels" class="nav-link" data-scroll-target="#add-title-and-axis-labels">Add title and axis labels</a></li>
-  </ul></li>
-  <li><a href="#plotting-a-categorical-predictor-of-a-continuous-variable" id="toc-plotting-a-categorical-predictor-of-a-continuous-variable" class="nav-link" data-scroll-target="#plotting-a-categorical-predictor-of-a-continuous-variable">Plotting a categorical predictor of a continuous variable</a></li>
-  <li><a href="#bar-column-graphs-to-plot-quantities" id="toc-bar-column-graphs-to-plot-quantities" class="nav-link" data-scroll-target="#bar-column-graphs-to-plot-quantities">Bar / column graphs to plot quantities</a></li>
-  <li><a href="#line-graphs-to-plot-changes-over-time" id="toc-line-graphs-to-plot-changes-over-time" class="nav-link" data-scroll-target="#line-graphs-to-plot-changes-over-time">Line graphs to plot changes over time</a></li>
-  <li><a href="#histograms-to-examine-distributions" id="toc-histograms-to-examine-distributions" class="nav-link" data-scroll-target="#histograms-to-examine-distributions">Histograms to examine distributions</a></li>
-  <li><a href="#boxplots-to-examine-distributions" id="toc-boxplots-to-examine-distributions" class="nav-link" data-scroll-target="#boxplots-to-examine-distributions">Boxplots to examine distributions</a></li>
-  <li><a href="#gapminder-data" id="toc-gapminder-data" class="nav-link" data-scroll-target="#gapminder-data">Gapminder data</a></li>
+  <li><a href="#characteristics-of-tidy-data" id="toc-characteristics-of-tidy-data" class="nav-link active" data-scroll-target="#characteristics-of-tidy-data">Characteristics of tidy data</a></li>
+  <li><a href="#pivoting-to-longer" id="toc-pivoting-to-longer" class="nav-link" data-scroll-target="#pivoting-to-longer">Pivoting to longer</a></li>
+  <li><a href="#pivoting-to-wider" id="toc-pivoting-to-wider" class="nav-link" data-scroll-target="#pivoting-to-wider">Pivoting to wider</a></li>
+  <li><a href="#separating-columns" id="toc-separating-columns" class="nav-link" data-scroll-target="#separating-columns">Separating columns</a></li>
   </ul>
 </nav>
     </div>
@@ -4551,26 +4539,14 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data science session 3</h1>
+<h1 class="title">Week 6 live coding</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Ina </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 7, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -4586,86 +4562,278 @@ vertical-align: -.125em;
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
 ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
+✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="discussion-of-week-2-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="discussion-of-week-2-exercises">Discussion of week 2 exercises</h2>
+<section id="characteristics-of-tidy-data" class="level2">
+<h2 class="anchored" data-anchor-id="characteristics-of-tidy-data">Characteristics of tidy data</h2>
+<p>Inspect tables 1–3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>table2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   country      year type            count
+   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+ 1 Afghanistan  1999 cases             745
+ 2 Afghanistan  1999 population   19987071
+ 3 Afghanistan  2000 cases            2666
+ 4 Afghanistan  2000 population   20595360
+ 5 Brazil       1999 cases           37737
+ 6 Brazil       1999 population  172006362
+ 7 Brazil       2000 cases           80488
+ 8 Brazil       2000 population  174504898
+ 9 China        1999 cases          212258
+10 China        1999 population 1272915272
+11 China        2000 cases          213766
+12 China        2000 population 1280428583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>table3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country      year rate             
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            
+1 Afghanistan  1999 745/19987071     
+2 Afghanistan  2000 2666/20595360    
+3 Brazil       1999 37737/172006362  
+4 Brazil       2000 80488/174504898  
+5 China        1999 212258/1272915272
+6 China        2000 213766/1280428583</code></pre>
+</div>
+</div>
+<p>Inspect tables 4a and 4b.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>table4a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  country     `1999` `2000`
+  &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1 Afghanistan    745   2666
+2 Brazil       37737  80488
+3 China       212258 213766</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>table4b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  country         `1999`     `2000`
+  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+1 Afghanistan   19987071   20595360
+2 Brazil       172006362  174504898
+3 China       1272915272 1280428583</code></pre>
+</div>
+</div>
 </section>
-<section id="r-basics" class="level2">
-<h2 class="anchored" data-anchor-id="r-basics">R Basics</h2>
-<p>Create new objects with the assignment operator <code>&lt;-</code></p>
-<p>What you can do with an object depends on its type, e.g. basic arithmetic with numeric objects only</p>
-<p>To see the result of a computation that creates a new object, either type the name of the object to inspect it or enclose the operation in parentheses.</p>
-<p>Example of a more complex object name</p>
-<p>Example of a function: <code>seq()</code></p>
-<p>Be careful with brackets and quotation marks</p>
+<section id="pivoting-to-longer" class="level2">
+<h2 class="anchored" data-anchor-id="pivoting-to-longer">Pivoting to longer</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>table4a <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1999</span><span class="st">`</span>,<span class="st">`</span><span class="at">2000</span><span class="st">`</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;cases&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     year   cases
+  &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;
+1 Afghanistan 1999     745
+2 Afghanistan 2000    2666
+3 Brazil      1999   37737
+4 Brazil      2000   80488
+5 China       1999  212258
+6 China       2000  213766</code></pre>
+</div>
+</div>
+<p>Here, the <code>c()</code> operator concatenates objects into a vector, e.g.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;bananas&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;apples&quot;  &quot;oranges&quot; &quot;bananas&quot;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can select individual objects from the vector through their index</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;apples&quot;</code></pre>
+</div>
+</div>
+<p>Alternative syntax for picking out columns that are contiguous:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>table4a <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">1999</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2000</span><span class="st">`</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;cases&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     year   cases
+  &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;
+1 Afghanistan 1999     745
+2 Afghanistan 2000    2666
+3 Brazil      1999   37737
+4 Brazil      2000   80488
+5 China       1999  212258
+6 China       2000  213766</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The difference between <code>c()</code> and <code>:</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>An example to illustrate the difference between using <code>c()</code> and <code>:</code> to select columns. Use <code>c()</code> to select any two columns in the penguins data; use <code>:</code> to select columns that are adjacent to one another by specifying the first and last columns</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(species, flipper_length_mm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 2
+   species flipper_length_mm
+   &lt;fct&gt;               &lt;int&gt;
+ 1 Adelie                181
+ 2 Adelie                186
+ 3 Adelie                195
+ 4 Adelie                 NA
+ 5 Adelie                193
+ 6 Adelie                190
+ 7 Adelie                181
+ 8 Adelie                195
+ 9 Adelie                193
+10 Adelie                190
+# ℹ 334 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species<span class="sc">:</span>flipper_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 5
+   species island    bill_length_mm bill_depth_mm flipper_length_mm
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181
+ 2 Adelie  Torgersen           39.5          17.4               186
+ 3 Adelie  Torgersen           40.3          18                 195
+ 4 Adelie  Torgersen           NA            NA                  NA
+ 5 Adelie  Torgersen           36.7          19.3               193
+ 6 Adelie  Torgersen           39.3          20.6               190
+ 7 Adelie  Torgersen           38.9          17.8               181
+ 8 Adelie  Torgersen           39.2          19.6               195
+ 9 Adelie  Torgersen           34.1          18.1               193
+10 Adelie  Torgersen           42            20.2               190
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Pivoting <code>table4b</code> as another exercise:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>table4b <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">1999</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2000</span><span class="st">`</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;population&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  country     year  population
+  &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;
+1 Afghanistan 1999    19987071
+2 Afghanistan 2000    20595360
+3 Brazil      1999   172006362
+4 Brazil      2000   174504898
+5 China       1999  1272915272
+6 China       2000  1280428583</code></pre>
+</div>
+</div>
 </section>
-<section id="a-little-more-on-data-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="a-little-more-on-data-manipulation">A little more on data manipulation</h2>
-<p>Create new objects from the penguins data</p>
-<p>Additional ways to summarise</p>
-<p>Other summary functions: <code>median()</code>, <code>min()</code>, <code>max()</code></p>
-<p>To look at groups use <code>group_by()</code></p>
-<p>To look at the number of observations in a group use <code>count()</code></p>
+<section id="pivoting-to-wider" class="level2">
+<h2 class="anchored" data-anchor-id="pivoting-to-wider">Pivoting to wider</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;type&quot;</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">&quot;count&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
 </section>
-<section id="plotting" class="level2">
-<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
-<section id="scatterplots-for-two-continuous-variables" class="level3">
-<h3 class="anchored" data-anchor-id="scatterplots-for-two-continuous-variables">Scatterplots for two continuous variables</h3>
-<p>Scatterplot example:</p>
-</section>
-<section id="add-title-and-axis-labels" class="level3">
-<h3 class="anchored" data-anchor-id="add-title-and-axis-labels">Add title and axis labels</h3>
-<p>Adding a meaningful title and axis labels makes your plot more informative and readable.</p>
-</section>
-</section>
-<section id="plotting-a-categorical-predictor-of-a-continuous-variable" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-a-categorical-predictor-of-a-continuous-variable">Plotting a categorical predictor of a continuous variable</h2>
-<p>What about species as a predictor of body mass?</p>
-<p><code>geom_jitter()</code> produces a better result:</p>
-</section>
-<section id="bar-column-graphs-to-plot-quantities" class="level2">
-<h2 class="anchored" data-anchor-id="bar-column-graphs-to-plot-quantities">Bar / column graphs to plot quantities</h2>
-<p>Alternative approach: plot mean body mass by species using a bar / column graph with <code>geom_col()</code>:</p>
-<p>It is crucial to summarise first in order to only have one value per species, otherwise the plot won’t show what you think:</p>
-<p>Note that there is also a <code>geom_bar()</code>. Have a look at the documentation: what is the difference between <code>geom_col()</code> and <code>geom_bar()</code>?</p>
-</section>
-<section id="line-graphs-to-plot-changes-over-time" class="level2">
-<h2 class="anchored" data-anchor-id="line-graphs-to-plot-changes-over-time">Line graphs to plot changes over time</h2>
-<p>Line graph to plot the number of sightings per year We first need to count the number of sightings</p>
-<p>Adding groups, e.g. to look at the number of sightings per year for each species:</p>
-</section>
-<section id="histograms-to-examine-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="histograms-to-examine-distributions">Histograms to examine distributions</h2>
-<p>Use a histogram to look at a distribution (e.g. of bill depth).</p>
-<p>Pair a histogram with facets to look at groups:</p>
-</section>
-<section id="boxplots-to-examine-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="boxplots-to-examine-distributions">Boxplots to examine distributions</h2>
-<ul>
-<li>Line = median</li>
-<li>Lower edge of box = 1st quartile</li>
-<li>Upper edge of box = 3rd quartile</li>
-<li>Whiskers extend to largest / smallest value, maximally 1.5 interquartile ranges from edge of box</li>
-<li>Data points beyond the whiskers are deemed outliers and plotted individually</li>
-</ul>
-<p>Add colour fill:</p>
-</section>
-<section id="gapminder-data" class="level2">
-<h2 class="anchored" data-anchor-id="gapminder-data">Gapminder data</h2>
-<ul>
-<li>How has life expectancy in Australia changed over time?</li>
-<li>What was the relationship between life expectancy and how wealthy a country is (gdpPercap) in 1952? In 2007?</li>
-<li>How did the mean life expectancy per continent change over time?</li>
-<li>Which continent had the highest variability in population across countries? Pick two years of your choice to examine.</li>
-</ul>
+<section id="separating-columns" class="level2">
+<h2 class="anchored" data-anchor-id="separating-columns">Separating columns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;population&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year cases  population
+  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     
+1 Afghanistan  1999 745    19987071  
+2 Afghanistan  2000 2666   20595360  
+3 Brazil       1999 37737  172006362 
+4 Brazil       2000 80488  174504898 
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
+<p>Set convert to TRUE to ensure that columns are of the correct type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> rate, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;population&quot;</span>), <span class="at">convert =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  country      year  cases population
+  &lt;chr&gt;       &lt;dbl&gt;  &lt;int&gt;      &lt;int&gt;
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583</code></pre>
+</div>
+</div>
 
 
 </section>
