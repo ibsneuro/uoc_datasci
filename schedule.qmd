@@ -13,13 +13,16 @@ title: "Schedule & Materials"
 | 5 | 29/11/2023 | Importing and tidying data | [slides - importing](slides/d02_01_importing_data.html){target="_blank"} \\ [slides - tidying](slides/d02_02_tidying_data.html){target="_blank"} | [student_teacher_ratios.csv](https://github.com/ibsneuro/uoc_datasci/blob/main/data/student_teacher_ratios.csv){target="_blank"} \\ [live coding output](code/week5.qmd){target="_blank"} \\ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/week5.qmd){target="_blank"} |
 | 6 | 06/12/2023 | Tidying ctd. / Next steps | [slides - next steps](slides/d03_01_next_steps.html){target="_blank"}  | [primary_school_completion.csv](https://github.com/ibsneuro/uoc_datasci/blob/main/data/primary_school_completion.csv){target="_blank"} \\ [ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv](https://github.com/ibsneuro/uoc_datasci/blob/main/data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv) \\ [live coding output](code/week6.html){target="_blank"} \\ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/week6.qmd){target="_blank"} |
 
-### January 2024
+### January-February 2024 (zoom sessions)
 
-- Zoom sessions (dates and times to be negotiated)
-- Suggested topics:
-  - version control with git and GitHub
-  - other (more advanced) topics by negotiation
-  - consultation sessions for your report
+All sessions will take place at 9 am CET; see Ilias for zoom links and session recordings.
+
+| Week | Date | Topic | Slides | Other Materials |
+|------|------|------|------| ------|
+| 7 | 09/01/2024 | Joining data frames / working with strings |[slides](slides/d04_01_strings_joins.html){target="_blank"} |[spotify_dataset.csv](https://github.com/ibsneuro/uoc_datasci/blob/main/data/spotify_dataset.csv){target="_blank"} \\ [live coding output](code/session7_live.html){target="_blank"} \\ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/session7_live.qmd){target="_blank"}|
+| 8 | 25/01/2024 | TBA |      |      |
+| 9 | 01/02/2024 | TBA |      |      |
+
 
 ## Resources
 

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ina">
+
+<title>Introduction to Data Science - Session 7</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Introduction to Data Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About the course</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html" rel="" target="">
+ <span class="menu-text">Schedule &amp; Materials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../licence.html" rel="" target="">
+ <span class="menu-text">Licence &amp; Acknowledgements</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#joining-data-frames" id="toc-joining-data-frames" class="nav-link active" data-scroll-target="#joining-data-frames">Joining data frames</a></li>
+  <li><a href="#workinf-with-strings" id="toc-workinf-with-strings" class="nav-link" data-scroll-target="#workinf-with-strings">Workinf with strings</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Session 7</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ina </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="joining-data-frames" class="level2">
+<h2 class="anchored" data-anchor-id="joining-data-frames">Joining data frames</h2>
+<p>Start with a left-join example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,month,day,dep_time,carrier,flight,origin,dest) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(airlines, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 9
+    year month   day dep_time carrier flight origin dest  name                  
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                 
+ 1  2013     1     1      517 UA        1545 EWR    IAH   United Air Lines Inc. 
+ 2  2013     1     1      533 UA        1714 LGA    IAH   United Air Lines Inc. 
+ 3  2013     1     1      542 AA        1141 JFK    MIA   American Airlines Inc.
+ 4  2013     1     1      544 B6         725 JFK    BQN   JetBlue Airways       
+ 5  2013     1     1      554 DL         461 LGA    ATL   Delta Air Lines Inc.  
+ 6  2013     1     1      554 UA        1696 EWR    ORD   United Air Lines Inc. 
+ 7  2013     1     1      555 B6         507 EWR    FLL   JetBlue Airways       
+ 8  2013     1     1      557 EV        5708 LGA    IAD   ExpressJet Airlines I…
+ 9  2013     1     1      557 B6          79 JFK    MCO   JetBlue Airways       
+10  2013     1     1      558 AA         301 LGA    ORD   American Airlines Inc.
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>Inner join to only look at Hawaiian and Alaskan airlines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>airlines2 <span class="ot">&lt;-</span> airlines <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carrier <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"HA"</span>,<span class="st">"AS"</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,month,day,dep_time,carrier,flight,origin,dest) <span class="sc">|&gt;</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(airlines2, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,056 × 9
+    year month   day dep_time carrier flight origin dest  name                  
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                 
+ 1  2013     1     1      724 AS          11 EWR    SEA   Alaska Airlines Inc.  
+ 2  2013     1     1      857 HA          51 JFK    HNL   Hawaiian Airlines Inc.
+ 3  2013     1     1     1808 AS           7 EWR    SEA   Alaska Airlines Inc.  
+ 4  2013     1     2      722 AS          11 EWR    SEA   Alaska Airlines Inc.  
+ 5  2013     1     2      909 HA          51 JFK    HNL   Hawaiian Airlines Inc.
+ 6  2013     1     2     1818 AS           7 EWR    SEA   Alaska Airlines Inc.  
+ 7  2013     1     3      724 AS          11 EWR    SEA   Alaska Airlines Inc.  
+ 8  2013     1     3      914 HA          51 JFK    HNL   Hawaiian Airlines Inc.
+ 9  2013     1     3     1817 AS           7 EWR    SEA   Alaska Airlines Inc.  
+10  2013     1     4      725 AS          11 EWR    SEA   Alaska Airlines Inc.  
+# ℹ 1,046 more rows</code></pre>
+</div>
+</div>
+<p>Using left join on our airlines2 data frame would produce missing values</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,month,day,dep_time,carrier,flight,origin,dest) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(airlines2, <span class="at">by =</span> <span class="st">"carrier"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 9
+    year month   day dep_time carrier flight origin dest  name 
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;
+ 1  2013     1     1      517 UA        1545 EWR    IAH   &lt;NA&gt; 
+ 2  2013     1     1      533 UA        1714 LGA    IAH   &lt;NA&gt; 
+ 3  2013     1     1      542 AA        1141 JFK    MIA   &lt;NA&gt; 
+ 4  2013     1     1      544 B6         725 JFK    BQN   &lt;NA&gt; 
+ 5  2013     1     1      554 DL         461 LGA    ATL   &lt;NA&gt; 
+ 6  2013     1     1      554 UA        1696 EWR    ORD   &lt;NA&gt; 
+ 7  2013     1     1      555 B6         507 EWR    FLL   &lt;NA&gt; 
+ 8  2013     1     1      557 EV        5708 LGA    IAD   &lt;NA&gt; 
+ 9  2013     1     1      557 B6          79 JFK    MCO   &lt;NA&gt; 
+10  2013     1     1      558 AA         301 LGA    ORD   &lt;NA&gt; 
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>Joining data frames with non-overlapping key names</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin<span class="sc">:</span>humid) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(airports, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"origin"</span> <span class="ot">=</span> <span class="st">"faa"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 26,115 × 15
+   origin  year month   day  hour  temp  dewp humid name         lat   lon   alt
+   &lt;chr&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 EWR     2013     1     1     1  39.0  26.1  59.4 Newark Li…  40.7 -74.2    18
+ 2 EWR     2013     1     1     2  39.0  27.0  61.6 Newark Li…  40.7 -74.2    18
+ 3 EWR     2013     1     1     3  39.0  28.0  64.4 Newark Li…  40.7 -74.2    18
+ 4 EWR     2013     1     1     4  39.9  28.0  62.2 Newark Li…  40.7 -74.2    18
+ 5 EWR     2013     1     1     5  39.0  28.0  64.4 Newark Li…  40.7 -74.2    18
+ 6 EWR     2013     1     1     6  37.9  28.0  67.2 Newark Li…  40.7 -74.2    18
+ 7 EWR     2013     1     1     7  39.0  28.0  64.4 Newark Li…  40.7 -74.2    18
+ 8 EWR     2013     1     1     8  39.9  28.0  62.2 Newark Li…  40.7 -74.2    18
+ 9 EWR     2013     1     1     9  39.9  28.0  62.2 Newark Li…  40.7 -74.2    18
+10 EWR     2013     1     1    10  41    28.0  59.6 Newark Li…  40.7 -74.2    18
+# ℹ 26,105 more rows
+# ℹ 3 more variables: tz &lt;dbl&gt;, dst &lt;chr&gt;, tzone &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="workinf-with-strings" class="level2">
+<h2 class="anchored" data-anchor-id="workinf-with-strings">Workinf with strings</h2>
+<p>Import spotify data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>spotify <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"spotify_dataset.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1556 Columns: 23</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (8): Week of Highest Charting, Song Name, Artist, Song ID, Genre, Relea...
+dbl (14): Index, Highest Charting Position, Number of Times Charted, Artist ...
+num  (1): Streams
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(spotify)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,556
+Columns: 23
+$ index                     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1…
+$ highest_charting_position &lt;dbl&gt; 1, 2, 1, 3, 5, 1, 3, 2, 3, 8, 4, 9, 5, 1, 2,…
+$ number_of_times_charted   &lt;dbl&gt; 8, 3, 11, 5, 1, 18, 16, 10, 8, 10, 43, 9, 3,…
+$ week_of_highest_charting  &lt;chr&gt; "2021-07-23--2021-07-30", "2021-07-23--2021-…
+$ song_name                 &lt;chr&gt; "Beggin'", "STAY (with Justin Bieber)", "goo…
+$ streams                   &lt;dbl&gt; 48633449, 47248719, 40162559, 37799456, 3394…
+$ artist                    &lt;chr&gt; "Måneskin", "The Kid LAROI", "Olivia Rodrigo…
+$ artist_followers          &lt;dbl&gt; 3377762, 2230022, 6266514, 83293380, 5473565…
+$ song_id                   &lt;chr&gt; "3Wrjm47oTz2sjIgck11l5e", "5HCyWlXZPP0y6Gqq8…
+$ genre                     &lt;chr&gt; "['indie rock italiano', 'italian pop']", "[…
+$ release_date              &lt;chr&gt; "2017-12-08", "2021-07-09", "2021-05-21", "2…
+$ weeks_charted             &lt;chr&gt; "2021-07-23--2021-07-30\n2021-07-16--2021-07…
+$ popularity                &lt;dbl&gt; 100, 99, 99, 98, 96, 97, 94, 95, 96, 95, 89,…
+$ danceability              &lt;dbl&gt; 0.714, 0.591, 0.563, 0.808, 0.736, 0.610, 0.…
+$ energy                    &lt;dbl&gt; 0.800, 0.764, 0.664, 0.897, 0.704, 0.508, 0.…
+$ loudness                  &lt;dbl&gt; -4.808, -5.484, -5.044, -3.712, -7.409, -6.6…
+$ speechiness               &lt;dbl&gt; 0.0504, 0.0483, 0.1540, 0.0348, 0.0615, 0.15…
+$ acousticness              &lt;dbl&gt; 0.12700, 0.03830, 0.33500, 0.04690, 0.02030,…
+$ liveness                  &lt;dbl&gt; 0.3590, 0.1030, 0.0849, 0.3640, 0.0501, 0.38…
+$ tempo                     &lt;dbl&gt; 134.002, 169.928, 166.928, 126.026, 149.995,…
+$ duration_ms               &lt;dbl&gt; 211560, 141806, 178147, 231041, 212000, 1378…
+$ valence                   &lt;dbl&gt; 0.5890, 0.4780, 0.6880, 0.5910, 0.8940, 0.75…
+$ chord                     &lt;chr&gt; "B", "C#/Db", "A", "B", "D#/Eb", "G#/Ab", "G…</code></pre>
+</div>
+</div>
+<p>Using <code>str_sub()</code> to extract substrings:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>spotify <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chord_simplified =</span> <span class="fu">str_sub</span>(chord,<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(chord_simplified, <span class="at">sort=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+  chord_simplified     n
+  &lt;chr&gt;            &lt;int&gt;
+1 C                  369
+2 G                  266
+3 F                  252
+4 A                  240
+5 D                  165
+6 B                  141
+7 E                  112
+8 &lt;NA&gt;                11</code></pre>
+</div>
+</div>
+<p><code>str_detect()</code> detects patterns within a string.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>spotify <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(genre,<span class="st">"pop"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist,song_name,genre)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 819 × 3
+   artist         song_name                         genre                       
+   &lt;chr&gt;          &lt;chr&gt;                             &lt;chr&gt;                       
+ 1 Måneskin       Beggin'                           ['indie rock italiano', 'it…
+ 2 Olivia Rodrigo good 4 u                          ['pop']                     
+ 3 Ed Sheeran     Bad Habits                        ['pop', 'uk pop']           
+ 4 Lil Nas X      INDUSTRY BABY (feat. Jack Harlow) ['lgbtq+ hip hop', 'pop rap…
+ 5 Lil Nas X      MONTERO (Call Me By Your Name)    ['lgbtq+ hip hop', 'pop rap…
+ 6 Doja Cat       Kiss Me More (feat. SZA)          ['dance pop', 'pop']        
+ 7 Rauw Alejandro Todo De Ti                        ['puerto rican pop', 'trap …
+ 8 Måneskin       I WANNA BE YOUR SLAVE             ['indie rock italiano', 'it…
+ 9 Dua Lipa       Levitating (feat. DaBaby)         ['dance pop', 'pop', 'uk po…
+10 BTS            Permission to Dance               ['k-pop', 'k-pop boy group']
+# ℹ 809 more rows</code></pre>
+</div>
+</div>
+<p>Use <code>str_extract()</code> to extract patterns rather than just detect.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>spotify <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genre_simple =</span> <span class="fu">str_extract</span>(genre,<span class="st">"pop"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist,song_name,genre,genre_simple)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,556 × 4
+   artist         song_name                         genre           genre_simple
+   &lt;chr&gt;          &lt;chr&gt;                             &lt;chr&gt;           &lt;chr&gt;       
+ 1 Måneskin       Beggin'                           ['indie rock i… pop         
+ 2 The Kid LAROI  STAY (with Justin Bieber)         ['australian h… &lt;NA&gt;        
+ 3 Olivia Rodrigo good 4 u                          ['pop']         pop         
+ 4 Ed Sheeran     Bad Habits                        ['pop', 'uk po… pop         
+ 5 Lil Nas X      INDUSTRY BABY (feat. Jack Harlow) ['lgbtq+ hip h… pop         
+ 6 Lil Nas X      MONTERO (Call Me By Your Name)    ['lgbtq+ hip h… pop         
+ 7 Doja Cat       Kiss Me More (feat. SZA)          ['dance pop', … pop         
+ 8 Rauw Alejandro Todo De Ti                        ['puerto rican… pop         
+ 9 Bad Bunny      Yonaguni                          ['latin', 'reg… &lt;NA&gt;        
+10 Måneskin       I WANNA BE YOUR SLAVE             ['indie rock i… pop         
+# ℹ 1,546 more rows</code></pre>
+</div>
+</div>
+<p>Splitting up information into different rows</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>spotify <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(artist,song_name,genre) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_longer_delim</span>(genre, <span class="at">delim=</span><span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,665 × 3
+   artist         song_name                         genre                   
+   &lt;chr&gt;          &lt;chr&gt;                             &lt;chr&gt;                   
+ 1 Måneskin       Beggin'                           "['indie rock italiano'"
+ 2 Måneskin       Beggin'                           " 'italian pop']"       
+ 3 The Kid LAROI  STAY (with Justin Bieber)         "['australian hip hop']"
+ 4 Olivia Rodrigo good 4 u                          "['pop']"               
+ 5 Ed Sheeran     Bad Habits                        "['pop'"                
+ 6 Ed Sheeran     Bad Habits                        " 'uk pop']"            
+ 7 Lil Nas X      INDUSTRY BABY (feat. Jack Harlow) "['lgbtq+ hip hop'"     
+ 8 Lil Nas X      INDUSTRY BABY (feat. Jack Harlow) " 'pop rap']"           
+ 9 Lil Nas X      MONTERO (Call Me By Your Name)    "['lgbtq+ hip hop'"     
+10 Lil Nas X      MONTERO (Call Me By Your Name)    " 'pop rap']"           
+# ℹ 4,655 more rows</code></pre>
+</div>
+</div>
+<p>A bit more on patterns …</p>
+<p>Find all airports containing “New”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>airports <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name,<span class="st">"New"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 19 × 8
+   faa   name                               lat    lon   alt    tz dst   tzone  
+   &lt;chr&gt; &lt;chr&gt;                            &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1 EHM   Cape Newenham Lrrs                58.6 -162.    541    -9 A     Americ…
+ 2 ESN   Easton-Newnam Field Airport       38.8  -76.1    72    -5 A     Americ…
+ 3 EWB   New Bedford Regional Airport      41.7  -71.0    80    -5 A     Americ…
+ 4 EWK   Newton City-County Airport        38.1  -97.3  1533    -6 A     Americ…
+ 5 EWR   Newark Liberty Intl               40.7  -74.2    18    -5 A     Americ…
+ 6 GON   Groton New London                 41.3  -72.0     9    -5 A     Americ…
+ 7 HVN   Tweed-New Haven Airport           41.3  -72.9    14    -5 A     Americ…
+ 8 ILG   New Castle                        39.7  -75.6    79    -5 A     Americ…
+ 9 JCI   New Century AirCenter Airport     38.8  -94.9  1087    -6 A     Americ…
+10 KNW   New Stuyahok Airport              59.4 -157.    302    -9 A     Americ…
+11 MSY   Louis Armstrong New Orleans Intl  30.0  -90.3     4    -6 A     Americ…
+12 NBG   New Orleans Nas Jrb               29.8  -90.0     3    -6 A     Americ…
+13 ONP   Newport Municipal Airport         44.6 -124.    160    -8 A     Americ…
+14 PHF   Newport News Williamsburg Intl    37.1  -76.5    43    -5 A     Americ…
+15 UUU   Newport State                     41.5  -71.3   172    -5 A     Americ…
+16 WWT   Newtok Airport                    60.9 -165.     25    -9 U     Americ…
+17 ZRP   Newark Penn Station               40.7  -74.2     0    -5 A     Americ…
+18 ZRZ   New Carrollton Rail Station       38.9  -76.9    39    -5 A     Americ…
+19 ZVE   New Haven Rail Station            41.3  -72.9     7    -5 A     Americ…</code></pre>
+</div>
+</div>
+<p>But this is case sensitive</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>airports <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name,<span class="st">"new"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 8
+  faa   name               lat   lon   alt    tz dst   tzone            
+  &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;            
+1 GNU   Goodnews Airport  59.1 -162.    15    -9 A     America/Anchorage</code></pre>
+</div>
+</div>
+<p>Use a regular expression to look for upper and lower case n/N</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>airports <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name,<span class="st">"[nN]ew"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 8
+   faa   name                               lat    lon   alt    tz dst   tzone  
+   &lt;chr&gt; &lt;chr&gt;                            &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1 EHM   Cape Newenham Lrrs                58.6 -162.    541    -9 A     Americ…
+ 2 ESN   Easton-Newnam Field Airport       38.8  -76.1    72    -5 A     Americ…
+ 3 EWB   New Bedford Regional Airport      41.7  -71.0    80    -5 A     Americ…
+ 4 EWK   Newton City-County Airport        38.1  -97.3  1533    -6 A     Americ…
+ 5 EWR   Newark Liberty Intl               40.7  -74.2    18    -5 A     Americ…
+ 6 GNU   Goodnews Airport                  59.1 -162.     15    -9 A     Americ…
+ 7 GON   Groton New London                 41.3  -72.0     9    -5 A     Americ…
+ 8 HVN   Tweed-New Haven Airport           41.3  -72.9    14    -5 A     Americ…
+ 9 ILG   New Castle                        39.7  -75.6    79    -5 A     Americ…
+10 JCI   New Century AirCenter Airport     38.8  -94.9  1087    -6 A     Americ…
+11 KNW   New Stuyahok Airport              59.4 -157.    302    -9 A     Americ…
+12 MSY   Louis Armstrong New Orleans Intl  30.0  -90.3     4    -6 A     Americ…
+13 NBG   New Orleans Nas Jrb               29.8  -90.0     3    -6 A     Americ…
+14 ONP   Newport Municipal Airport         44.6 -124.    160    -8 A     Americ…
+15 PHF   Newport News Williamsburg Intl    37.1  -76.5    43    -5 A     Americ…
+16 UUU   Newport State                     41.5  -71.3   172    -5 A     Americ…
+17 WWT   Newtok Airport                    60.9 -165.     25    -9 U     Americ…
+18 ZRP   Newark Penn Station               40.7  -74.2     0    -5 A     Americ…
+19 ZRZ   New Carrollton Rail Station       38.9  -76.9    39    -5 A     Americ…
+20 ZVE   New Haven Rail Station            41.3  -72.9     7    -5 A     Americ…</code></pre>
+</div>
+</div>
+<p>Just look for “New” at the beginning of the name</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>airports <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name,<span class="st">"^New"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 8
+   faa   name                             lat    lon   alt    tz dst   tzone    
+   &lt;chr&gt; &lt;chr&gt;                          &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
+ 1 EWB   New Bedford Regional Airport    41.7  -71.0    80    -5 A     America/…
+ 2 EWK   Newton City-County Airport      38.1  -97.3  1533    -6 A     America/…
+ 3 EWR   Newark Liberty Intl             40.7  -74.2    18    -5 A     America/…
+ 4 ILG   New Castle                      39.7  -75.6    79    -5 A     America/…
+ 5 JCI   New Century AirCenter Airport   38.8  -94.9  1087    -6 A     America/…
+ 6 KNW   New Stuyahok Airport            59.4 -157.    302    -9 A     America/…
+ 7 NBG   New Orleans Nas Jrb             29.8  -90.0     3    -6 A     America/…
+ 8 ONP   Newport Municipal Airport       44.6 -124.    160    -8 A     America/…
+ 9 PHF   Newport News Williamsburg Intl  37.1  -76.5    43    -5 A     America/…
+10 UUU   Newport State                   41.5  -71.3   172    -5 A     America/…
+11 WWT   Newtok Airport                  60.9 -165.     25    -9 U     America/…
+12 ZRP   Newark Penn Station             40.7  -74.2     0    -5 A     America/…
+13 ZRZ   New Carrollton Rail Station     38.9  -76.9    39    -5 A     America/…
+14 ZVE   New Haven Rail Station          41.3  -72.9     7    -5 A     America/…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reclues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

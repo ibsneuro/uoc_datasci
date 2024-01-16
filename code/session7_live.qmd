@@ -1,0 +1,313 @@
+---
+title: "Session 7"
+author: "Ina"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+## Joining data frames
+
+Start with a left-join example:
+
+```{r}
+flights |> 
+  select(year,month,day,dep_time,carrier,flight,origin,dest) |> 
+  left_join(airlines, by = "carrier")
+
+```
+
+Inner join to only look at Hawaiian and Alaskan airlines.
+
+```{r}
+airlines2 <- airlines |> 
+  filter(carrier %in% c("HA","AS"))
+
+flights |> 
+  select(year,month,day,dep_time,carrier,flight,origin,dest) |> 
+  inner_join(airlines2, by = "carrier")
+
+```
+
+Using left join on our airlines2 data frame would produce missing values
+
+```{r}
+flights |> 
+  select(year,month,day,dep_time,carrier,flight,origin,dest) |> 
+  left_join(airlines2, by = "carrier")
+
+```
+
+Joining data frames with non-overlapping key names
+
+```{r}
+weather |> 
+  select(origin:humid) |> 
+  left_join(airports, by = c("origin" = "faa"))
+
+```
+
+## Workinf with strings
+
+Import spotify data.
+
+```{r}
+library(janitor)
+
+spotify <- read_csv("spotify_dataset.csv") |> 
+  clean_names()
+
+glimpse(spotify)
+
+```
+
+Using `str_sub()` to extract substrings:
+
+```{r}
+spotify |> 
+  mutate(chord_simplified = str_sub(chord,1,1)) |> 
+  count(chord_simplified, sort=TRUE)
+```
+
+`str_detect()` detects patterns within a string.
+
+```{r}
+spotify |> 
+  filter(str_detect(genre,"pop")) |> 
+  select(artist,song_name,genre)
+
+```
+
+Use `str_extract()` to extract patterns rather than just detect.
+
+```{r}
+spotify |> 
+  mutate(genre_simple = str_extract(genre,"pop")) |> 
+  select(artist,song_name,genre,genre_simple)
+
+```
+
+Splitting up information into different rows
+
+```{r}
+spotify |> 
+  select(artist,song_name,genre) |> 
+  separate_longer_delim(genre, delim=",")
+
+```
+
+A bit more on patterns ...
+
+Find all airports containing "New":
+
+```{r}
+airports |> 
+  filter(str_detect(name,"New"))
+```
+
+But this is case sensitive
+
+```{r}
+airports |> 
+  filter(str_detect(name,"new"))
+  
+```
+
+Use a regular expression to look for upper and lower case n/N
+
+```{r}
+airports |> 
+  filter(str_detect(name,"[nN]ew"))
+```
+
+Just look for "New" at the beginning of the name
+
+```{r}
+airports |> 
+  filter(str_detect(name,"^New"))
+```
+
+```{r}
+library(reclues)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
