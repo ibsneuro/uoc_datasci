@@ -1,0 +1,100 @@
+---
+title: "Customising Quarto Documents"
+subtitle: "and how to add references"
+author: "Ina Bornkessel-Schlesewsky"
+date: "2024-01-25"
+date-format: long
+format: 
+  html:
+    self-contained: true
+    theme: lux
+    toc: true
+    toc-location: left
+bibliography: example.bib
+csl: apa.csl
+execute: 
+  echo: false
+  warning: false
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(cowplot)
+library(ggsci)
+```
+
+
+## Quarto and markdown basics
+
+You already have quite a bit of experience with creating basic Quarto documents. For your project / report, however, you will want to create a more appealing document. Here are a few more tips to help you get started with this. For more details see <https://quarto.org>. For much more detail, see the [Quarto User Guide](https://quarto.org/docs/guide/).
+
+### Additional formatting
+
+You can embed additional levels of subheadings by using more hashes. To make text appear **bold** or in *italics* use asterisks. For embedded code, use backticks, e.g. to refer to a function such as `filter()`.
+
+### Dotpoints and lists
+
+* dotpoints can be created easily
+* by using asterisks
+* to create different levels
+  * use tabs
+  * here is one more
+
+1. numbered lists
+2. work in much the same way
+
+## Customising overall appearance
+
+To customise the overall appearance of your Quarto document, you can change the theme.
+This document uses the *lux* theme -- see the YAML header of the source document to see how to set the theme.
+A list of themes can be found [here](https://quarto.org/docs/output-formats/html-themes.html).
+
+There are also many other options, e.g. in regard to including a table of contents (or not) and how it is displayed.
+For html documents, as we are using here, [this section](https://quarto.org/docs/output-formats/html-basics.html) of the Quarto User Guide is very useful in this regard.
+
+## Code chunk behaviour
+
+For your final report, you won't want code to appear in the output document.
+You can customise the behaviour of code chunks by setting the `execute` options in the header of the document.
+For example, to run the code in each chunk without displaying the code itself in the knitted document, set `echo: false`.
+You can override this overall setting on a chunk-by-chunk basis; see [this section of the user guide](https://quarto.org/docs/output-formats/html-code.html#hiding-code) on how to do this.
+
+```{r }
+
+penguins |>  
+  filter(!is.na(sex)) |>  
+  ggplot(aes(x = species, y = flipper_length_mm, colour = species)) +
+  geom_jitter(alpha = 0.4, size = 2) +
+  stat_summary(fun = mean, geom = "point", size = 5) +
+  scale_colour_npg() +
+  theme_cowplot() +
+  guides(colour = "none") +
+  labs(
+    title = "Of the Palmer peninsula penguins, \nGentoo penguins have the longest flippers",
+    subtitle = "larger dots indicate by-species means",
+    x = "",
+    y = "Flipper length (mm)",
+    caption = "source: Gorman et al. (2014) via the palmerpenguins R package"
+  )
+
+```
+
+## Including other images
+
+Including other image files is easy!
+Include your figure caption in square brackets and the location of the image file relative to your Quarto document in round brackets.
+The location of the image file is called a "path" in technical terms: the easiest option is to have the file in the same folder as your .qmd document and to use a project-based workflow as discussed for reading in csv or other files for data exploration and analysis.
+
+![Palmer penguins - Artwork by \@allison_horst](palmerpenguins.png){width=60%}
+
+
+## Referencing in Quarto
+
+Communicating your results is an essential part of the data science workflow [@wickham2017a]. This of course also involves appropriate referencing. For example, if you're working with data on the Palmer archipelago penguins, you should mention that these are from @gorman2014 and provided as an R package by @horst2020. Note the different format for introducing references in parentheses and outside of them. How you refer to a reference depends on the citation key in your bib file.
+
+To change the referencing style, use a csl file and refer to it in your header. You can find csl files for different referencing styles in the [Zotero style repository](https://www.zotero.org/styles).
+
+For further information, see the [Quarto Manual](https://quarto.org/docs/authoring/footnotes-and-citations.html).
+
+## References

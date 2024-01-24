@@ -217,6 +217,48 @@
     "text": "Gapminder data\n\nsummary(gapminder)\n\n        country        continent        year         lifeExp     \n Afghanistan:  12   Africa  :624   Min.   :1952   Min.   :23.60  \n Albania    :  12   Americas:300   1st Qu.:1966   1st Qu.:48.20  \n Algeria    :  12   Asia    :396   Median :1980   Median :60.71  \n Angola     :  12   Europe  :360   Mean   :1980   Mean   :59.47  \n Argentina  :  12   Oceania : 24   3rd Qu.:1993   3rd Qu.:70.85  \n Australia  :  12                  Max.   :2007   Max.   :82.60  \n (Other)    :1632                                                \n      pop              gdpPercap       \n Min.   :6.001e+04   Min.   :   241.2  \n 1st Qu.:2.794e+06   1st Qu.:  1202.1  \n Median :7.024e+06   Median :  3531.8  \n Mean   :2.960e+07   Mean   :  7215.3  \n 3rd Qu.:1.959e+07   3rd Qu.:  9325.5  \n Max.   :1.319e+09   Max.   :113523.1  \n                                       \n\n\n\nHow has life expectancy in Germany changed over time?\n\n\ngapminder |&gt; \n  filter(country == \"Germany\") |&gt; \n  ggplot(aes(x = year, y = lifeExp)) +\n  geom_line() +\n  geom_point()\n\n\n\n\n\nWhat was the relationship between life expectancy and how wealthy a country is (gdpPercap) in 1952? In 2007?\n\nStart by looking at 1952:\n\ngapminder |&gt; \n  filter(year == 1952) |&gt; \n  ggplot(aes(x = gdpPercap, y = lifeExp)) +\n  geom_point()\n\n\n\n\nIdentify the outlier:\n\ngapminder |&gt; \n  filter(year == 1952, gdpPercap &gt; 90000)\n\n# A tibble: 1 × 6\n  country continent  year lifeExp    pop gdpPercap\n  &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;\n1 Kuwait  Asia       1952    55.6 160000   108382.\n\n\nRemove the outlier:\n\ngapminder |&gt; \n  filter(year == 1952, gdpPercap &lt; 90000) |&gt; \n  ggplot(aes(x = gdpPercap, y = lifeExp)) +\n  geom_point() +\n  scale_x_log10()\n\n\n\n\nNote that even after removing the outlier, there were still many datapoints “squashed together” close to 0, suggesting that there is a disparity of scale in regard to gdpPercap (i.e. the values of this variable for different countries are on different orders of magnitude). We have addressed this using a log scale (via the addition of scale_x_log10()).\nWe did not look at 2007 in the workshop on account of time constraints. However, the approach to do this would be parallel to the above.\n\nHow did the mean life expectancy per continent change over time?\n\n\ngapminder |&gt; \n  group_by(continent, year) |&gt; \n  summarise(mean_lifeExp = mean(lifeExp, na.rm = TRUE)) |&gt; \n  ggplot(aes(x = year, y = mean_lifeExp, colour = continent)) +\n  geom_line()\n\n`summarise()` has grouped output by 'continent'. You can override using the\n`.groups` argument.\n\n\n\n\n\nThe below question was not examined in the workshop due to time constraints.\n\nWhich continent had the highest variability in population across countries? Pick two years of your choice to examine."
   },
   {
+    "objectID": "code/customising_quarto.html",
+    "href": "code/customising_quarto.html",
+    "title": "Customising Quarto Documents",
+    "section": "",
+    "text": "You already have quite a bit of experience with creating basic Quarto documents. For your project / report, however, you will want to create a more appealing document. Here are a few more tips to help you get started with this. For more details see https://quarto.org. For much more detail, see the Quarto User Guide.\n\n\nYou can embed additional levels of subheadings by using more hashes. To make text appear bold or in italics use asterisks. For embedded code, use backticks, e.g. to refer to a function such as filter().\n\n\n\n\ndotpoints can be created easily\nby using asterisks\nto create different levels\n\nuse tabs\nhere is one more\n\n\n\nnumbered lists\nwork in much the same way"
+  },
+  {
+    "objectID": "code/customising_quarto.html#quarto-and-markdown-basics",
+    "href": "code/customising_quarto.html#quarto-and-markdown-basics",
+    "title": "Customising Quarto Documents",
+    "section": "",
+    "text": "You already have quite a bit of experience with creating basic Quarto documents. For your project / report, however, you will want to create a more appealing document. Here are a few more tips to help you get started with this. For more details see https://quarto.org. For much more detail, see the Quarto User Guide.\n\n\nYou can embed additional levels of subheadings by using more hashes. To make text appear bold or in italics use asterisks. For embedded code, use backticks, e.g. to refer to a function such as filter().\n\n\n\n\ndotpoints can be created easily\nby using asterisks\nto create different levels\n\nuse tabs\nhere is one more\n\n\n\nnumbered lists\nwork in much the same way"
+  },
+  {
+    "objectID": "code/customising_quarto.html#customising-overall-appearance",
+    "href": "code/customising_quarto.html#customising-overall-appearance",
+    "title": "Customising Quarto Documents",
+    "section": "Customising overall appearance",
+    "text": "Customising overall appearance\nTo customise the overall appearance of your Quarto document, you can change the theme. This document uses the lux theme – see the YAML header of the source document to see how to set the theme. A list of themes can be found here.\nThere are also many other options, e.g. in regard to including a table of contents (or not) and how it is displayed. For html documents, as we are using here, this section of the Quarto User Guide is very useful in this regard."
+  },
+  {
+    "objectID": "code/customising_quarto.html#code-chunk-behaviour",
+    "href": "code/customising_quarto.html#code-chunk-behaviour",
+    "title": "Customising Quarto Documents",
+    "section": "Code chunk behaviour",
+    "text": "Code chunk behaviour\nFor your final report, you won’t want code to appear in the output document. You can customise the behaviour of code chunks by setting the execute options in the header of the document. For example, to run the code in each chunk without displaying the code itself in the knitted document, set echo: false. You can override this overall setting on a chunk-by-chunk basis; see this section of the user guide on how to do this."
+  },
+  {
+    "objectID": "code/customising_quarto.html#including-other-images",
+    "href": "code/customising_quarto.html#including-other-images",
+    "title": "Customising Quarto Documents",
+    "section": "Including other images",
+    "text": "Including other images\nIncluding other image files is easy! Include your figure caption in square brackets and the location of the image file relative to your Quarto document in round brackets. The location of the image file is called a “path” in technical terms: the easiest option is to have the file in the same folder as your .qmd document and to use a project-based workflow as discussed for reading in csv or other files for data exploration and analysis.\n\n\n\nPalmer penguins - Artwork by @allison_horst"
+  },
+  {
+    "objectID": "code/customising_quarto.html#referencing-in-quarto",
+    "href": "code/customising_quarto.html#referencing-in-quarto",
+    "title": "Customising Quarto Documents",
+    "section": "Referencing in Quarto",
+    "text": "Referencing in Quarto\nCommunicating your results is an essential part of the data science workflow (Wickham & Grolemund, 2017). This of course also involves appropriate referencing. For example, if you’re working with data on the Palmer archipelago penguins, you should mention that these are from Gorman et al. (2014) and provided as an R package by Horst et al. (2020). Note the different format for introducing references in parentheses and outside of them. How you refer to a reference depends on the citation key in your bib file.\nTo change the referencing style, use a csl file and refer to it in your header. You can find csl files for different referencing styles in the Zotero style repository.\nFor further information, see the Quarto Manual."
+  },
+  {
     "objectID": "code/session7_live.html",
     "href": "code/session7_live.html",
     "title": "Session 7",
