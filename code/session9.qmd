@@ -1,0 +1,169 @@
+---
+title: "Session 9 live coding"
+author: "Ina"
+format: 
+  html:
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(nycflights13)
+
+```
+
+## Missing values
+
+How can you go about identifying missing values in your data? A few things you might try ...
+
+```{r}
+str(penguins)
+
+summary(penguins)
+
+min(penguins$bill_length_mm)
+
+penguins |> 
+  filter(bill_length_mm == NA)
+
+```
+Use `is.na()` to identify missing values
+
+```{r}
+penguins |> 
+  filter(is.na(bill_length_mm))
+
+```
+
+You can use `complete.cases()` to identify rows without missing values.
+See slides for a bit more informatio non why missing values require special treatment.
+
+```{r}
+penguins[complete.cases(penguins),]
+
+```
+
+If you want to select rows that are incomplete (i.e. contain missing values), add an ! as a negation
+
+```{r}
+penguins[!complete.cases(penguins),]
+
+```
+
+Another use of ! as a "negation":
+
+```{r}
+penguins |> 
+  filter(species != "Adelie")
+
+```
+
+Using `anti_join()` to find implicit missing values
+
+```{r}
+glimpse(flights)
+
+flights |> 
+  left_join(airports, by = c("dest" = "faa")) |> 
+  select(year:dep_time,dest,name)
+
+flights |> 
+  distinct(dest) |> 
+  anti_join(airports, by = c("dest" = "faa"))
+
+flights |> 
+  distinct(faa = dest) |> 
+  anti_join(airports)
+
+```
+
+Use `drop_na()` to drop all rows with any missing values
+
+```{r}
+penguins |> 
+  drop_na()
+
+```
+
+Use `drop_na()` with a particular column to restrict NA drops to that column only.
+
+```{r}
+penguins |> 
+  drop_na(bill_length_mm)
+
+```
+
+## Recode values
+
+Let's have another look at the `members` data from from the Himalayan Peaks data that we used for the session 4 exercises.
+
+```{r}
+members <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-22/members.csv')
+
+glimpse(members)
+
+```
+
+Focus on `death_cause` for the purposes of this example:
+
+```{r}
+members |> 
+  count(death_cause)
+
+```
+
+What if we wanted to reduce these different causes of death to just a few main categories?
+Use `case_when()` inside `mutate()` to create a new variable from recategorised cases of an existing one. 
+The syntax is `condition ~ new value` and each statement is evaluated in turn.
+`TRUE ~ "other"` captures all remaining cases, since `TRUE` is always true; otherwise, any uncategorised cases will be `NA`s.
+
+```{r}
+
+members |> 
+  # drop missing values first
+  drop_na(death_cause) |> 
+  mutate(death_cause_grouped = case_when(
+    death_cause == "Fall" ~ "fall",
+    death_cause == "Avalanche" ~ "snow",
+    TRUE ~ "other"
+  )) |> 
+  select(death_cause, death_cause_grouped) |> 
+  count(death_cause_grouped)
+
+```
+
+Use `cut()` (from base R) to recategorise a numeric variable as categorical.
+Here, the `breaks()` argument specifies the break points between each category; `labels()` allows you to provide labels for each category.
+The functions `cut_interval()`, `cut_number()` and `cut_width()` (from the {ggplot2} package, loaded as part of the tidyverse) offer convenient ways of discretising into groups of equal range, equal number of observations, or a set width.
+See the documentation for these functions for more information; one example using `cut_interval()` is provided below -- note that you could also use `labels()` here as in the example for `cut()`.
+
+```{r}
+members |> 
+  mutate(age_group = cut(age, breaks = c(0,18,40,60,100),
+                         labels = c("minor","young","middle-aged",
+                                    "older"))) |> 
+  select(peak_id:age,age_group) |> 
+  count(age_group)
+
+members |> 
+  mutate(age_group = cut_interval(age, n = 3)) |> 
+  select(peak_id:age,age_group) |> 
+  count(age_group)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

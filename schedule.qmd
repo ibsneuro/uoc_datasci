@@ -21,7 +21,7 @@ All sessions will take place at 9 am CET; see Ilias for zoom links and session r
 |------|------|------|------| ------|
 | 7 | 09/01/2024 | Joining data frames / working with strings |[slides](slides/d04_01_strings_joins.html){target="_blank"} |[spotify_dataset.csv](https://github.com/ibsneuro/uoc_datasci/blob/main/data/spotify_dataset.csv){target="_blank"} \\ [live coding output](code/session7_live.html){target="_blank"} \\ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/session7_live.qmd){target="_blank"}|
 | 8 | 25/01/2024 | More on Quarto reports |[slides](slides/d05_01_quarto.html){target="_blank"}|[Quarto example](code/customising_quarto.html){target="_blank"} \\ [source zip](https://github.com/ibsneuro/uoc_datasci/blob/main/code/session8.zip){target="_blank"}|
-| 9 | 01/02/2024 | Further tips and tricks |[slides](slides/d06_01_tips_tricks.html){target="_blank"}| N/A |
+| 9 | 01/02/2024 | Further tips and tricks |[slides](slides/d06_01_tips_tricks.html){target="_blank"}| [live coding output](code/session9.html){target="_blank"} \\ [source](https://github.com/ibsneuro/uoc_datasci/blob/main/code/session9.qmd){target="_blank"}|
 
 
 ## Resources
